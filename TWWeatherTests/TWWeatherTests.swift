@@ -33,4 +33,8 @@ class TWWeatherTests: XCTestCase {
         }
     }
     
+    func testLoadJson(){
+        NetworkManger
+    }
+    
 }

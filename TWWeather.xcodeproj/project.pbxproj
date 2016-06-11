@@ -17,6 +17,7 @@
 		187882201D0BE1110095DBD5 /* Venue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1878821F1D0BE1110095DBD5 /* Venue.swift */; };
 		187882221D0BE2E60095DBD5 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187882211D0BE2E60095DBD5 /* Country.swift */; };
 		187882241D0BE7DF0095DBD5 /* Sport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187882231D0BE7DF0095DBD5 /* Sport.swift */; };
+		187882281D0BFEE20095DBD5 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187882271D0BFEE20095DBD5 /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		1878821F1D0BE1110095DBD5 /* Venue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Venue.swift; sourceTree = "<group>"; };
 		187882211D0BE2E60095DBD5 /* Country.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		187882231D0BE7DF0095DBD5 /* Sport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sport.swift; sourceTree = "<group>"; };
+		187882271D0BFEE20095DBD5 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +139,7 @@
 		1878821D1D0BDDF50095DBD5 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				187882271D0BFEE20095DBD5 /* NetworkManager.swift */,
 			);
 			name = Networking;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				187882281D0BFEE20095DBD5 /* NetworkManager.swift in Sources */,
 				187882241D0BE7DF0095DBD5 /* Sport.swift in Sources */,
 				187881F21D0BDBBF0095DBD5 /* ViewController.swift in Sources */,
 				187882221D0BE2E60095DBD5 /* Country.swift in Sources */,
