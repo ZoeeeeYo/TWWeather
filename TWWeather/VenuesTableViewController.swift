@@ -91,6 +91,9 @@ class VenuesTableViewController: UITableViewController {
         performSegueWithIdentifier(VenuesTableViewCellSegue, sender: indexPath)
     }
     
+    
+    ///MARK: - IBActions
+    
     @IBAction func sortSegmentPressed (sender: UISegmentedControl!) {
         switch sender.selectedSegmentIndex {
             case 0:
@@ -106,6 +109,30 @@ class VenuesTableViewController: UITableViewController {
         }
         self.tableView.reloadData()
     }
+    
+    @IBAction func filterButtonPressed (sender: UIBarButtonItem) {
+//        let actionSheetController: UIAlertController = UIAlertController(title: "Filtered By", message: "", preferredStyle: .ActionSheet)
+//        
+//        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .Cancel) { action -> Void in
+//        }
+//        actionSheetController.addAction(cancelAction)
+//        let byCountry: UIAlertAction = UIAlertAction(title: "Country", style: .Default) { action -> Void in
+//            //Code for launching the camera goes here
+//        }
+//        actionSheetController.addAction(byCountry)
+//        
+//        let byWeather: UIAlertAction = UIAlertAction(title: "Weather", style: .Default) { action -> Void in
+//            //Code for picking from camera roll goes here
+//        }
+//        actionSheetController.addAction(byWeather)
+//        
+//        //Present the AlertController
+//        self.presentViewController(actionSheetController, animated: true, completion: nil)
+        
+        
+        
+    }
+    
 
     /// MARK: Helpers for data sort
     private func sortByTemperature() {

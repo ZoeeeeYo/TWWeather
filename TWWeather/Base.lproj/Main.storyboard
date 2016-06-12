@@ -129,7 +129,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="mVY-4D-CMT">
-                        <barButtonItem key="rightBarButtonItem" title="Filter" id="YdJ-1N-Lnz"/>
+                        <barButtonItem key="rightBarButtonItem" title="Filter" id="YdJ-1N-Lnz">
+                            <connections>
+                                <action selector="filterButtonPressed:" destination="tZs-gB-VG3" id="tdX-r7-3nL"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="sortSegControl" destination="ubx-vY-oxy" id="GCg-4N-OgI"/>
@@ -152,7 +156,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MpF-tr-fKc">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MpF-tr-fKc" userLabel="Condition View">
                                 <rect key="frame" x="0.0" y="284" width="600" height="200"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Partly Cloudy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RFU-Tr-Psr">
@@ -168,13 +172,7 @@
                                         <rect key="frame" x="408" y="8" width="184" height="184"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="184" id="9WV-VB-1aC"/>
-                                            <constraint firstAttribute="height" constant="200" id="P2W-J2-g7X"/>
                                         </constraints>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="P2W-J2-g7X"/>
-                                            </mask>
-                                        </variation>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18°C" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PD1-fU-MV5">
                                         <rect key="frame" x="18" y="53" width="372" height="139"/>
@@ -276,27 +274,20 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.89403803661616166" green="0.89403803661616166" blue="0.89403803661616166" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.92370975378787878" green="0.92370975378787878" blue="0.92370975378787878" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="lPd-Yp-gKQ" firstAttribute="top" secondItem="bac-PS-W4E" secondAttribute="bottom" id="5gu-tq-Ewu"/>
                             <constraint firstAttribute="trailing" secondItem="MpF-tr-fKc" secondAttribute="trailing" id="8NC-NS-rus"/>
                             <constraint firstItem="cqS-e7-vDo" firstAttribute="leading" secondItem="b1s-PG-I9c" secondAttribute="leading" id="Dw1-40-jT4"/>
                             <constraint firstItem="cqS-e7-vDo" firstAttribute="top" secondItem="MpF-tr-fKc" secondAttribute="bottom" constant="8" id="GKe-4g-WSZ"/>
                             <constraint firstItem="MpF-tr-fKc" firstAttribute="leading" secondItem="b1s-PG-I9c" secondAttribute="leading" id="TQi-e8-UlE"/>
-                            <constraint firstItem="JpL-px-ao3" firstAttribute="top" secondItem="bac-PS-W4E" secondAttribute="bottom" constant="21" id="ZiW-b1-NjE"/>
                             <constraint firstItem="lPd-Yp-gKQ" firstAttribute="centerX" secondItem="b1s-PG-I9c" secondAttribute="centerX" id="a9S-Fs-XkD"/>
                             <constraint firstItem="JpL-px-ao3" firstAttribute="top" secondItem="lPd-Yp-gKQ" secondAttribute="bottom" constant="2" id="ayc-t9-T1X"/>
                             <constraint firstItem="JpL-px-ao3" firstAttribute="centerX" secondItem="b1s-PG-I9c" secondAttribute="centerX" id="mTr-TM-Ino"/>
                             <constraint firstItem="DnN-I6-dt6" firstAttribute="top" secondItem="cqS-e7-vDo" secondAttribute="bottom" constant="18" id="snF-iT-XDU"/>
-                            <constraint firstItem="MpF-tr-fKc" firstAttribute="top" secondItem="bac-PS-W4E" secondAttribute="bottom" id="vgK-MZ-9Qa"/>
                             <constraint firstAttribute="trailing" secondItem="cqS-e7-vDo" secondAttribute="trailing" id="wPN-Fz-dUK"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="ZiW-b1-NjE"/>
-                                <exclude reference="vgK-MZ-9Qa"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="i9Q-cu-gLN"/>
                     <connections>

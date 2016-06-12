@@ -23,7 +23,6 @@ class WeatherDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 //        view.backgroundColor = UIColor.backGroundColour
-        view.backgroundColor = UIColor.lightGrayColor()
         navigationItem.title = venue.venueName + "/" + venue.country.name
         
         if let date = venue.lastUpdated {
