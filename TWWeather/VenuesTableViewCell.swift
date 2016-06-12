@@ -14,7 +14,7 @@ class VenuesTableViewCell: UITableViewCell {
     static let TemUnit = "°C"
     
     @IBOutlet weak var venueLabel: UILabel!
-    @IBOutlet weak var temeratureLabel: UILabel!
+    @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var weatherIconImage: UIImageView!
     @IBOutlet weak var countryLabel: UILabel!
@@ -25,9 +25,9 @@ class VenuesTableViewCell: UITableViewCell {
         self.countryLabel.text = venue.country.name
         
         if let tem = venue.temperature {
-            temeratureLabel.text = "\(tem)" + VenuesTableViewCell.TemUnit
+            temperatureLabel.text = "\(tem)" + VenuesTableViewCell.TemUnit
         } else {
-            temeratureLabel.text = VenuesTableViewCell.NotAvailable
+            temperatureLabel.text = VenuesTableViewCell.NotAvailable
         }
         
         if let date = venue.lastUpdated {

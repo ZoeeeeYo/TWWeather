@@ -17,6 +17,7 @@ enum SortType {
 class VenuesTableViewController: UITableViewController {
     let VenuesTableViewCellIdentifier = "VenuesTableViewCell"
     let URL: String = "http://dnu5embx6omws.cloudfront.net/venues/weather.json"
+    let VenuesTableViewCellSegue: String = "VenuesTableViewCellSegue"
     
     @IBOutlet weak var sortSegControl: UISegmentedControl!
     private var customRefreshController: UIRefreshControl!
@@ -37,6 +38,14 @@ class VenuesTableViewController: UITableViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == VenuesTableViewCellSegue {
+            if let indexPath = sender as? NSIndexPath, detailVC:WeatherDetailViewController = segue.destinationViewController as? WeatherDetailViewController {
+                detailVC.venue = venueArray[indexPath.row]
+            }
+        }
     }
     
     ///MARK: - Load data
@@ -77,6 +86,10 @@ class VenuesTableViewController: UITableViewController {
         return cell
     }
     
+    /// MARK: - Table view delegate
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        performSegueWithIdentifier(VenuesTableViewCellSegue, sender: indexPath)
+    }
     
     @IBAction func sortSegmentPressed (sender: UISegmentedControl!) {
         switch sender.selectedSegmentIndex {

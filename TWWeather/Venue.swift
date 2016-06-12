@@ -95,7 +95,10 @@ class Venue: NSObject {
             weatherCondition = nil
         }
         
-        let wind = json[KeyWind] as? String
+        let windTemp = json[KeyWind] as? String
+        var stringArray = windTemp?.componentsSeparatedByString(" ")
+        stringArray?.removeFirst()
+        let wind = stringArray?.joinWithSeparator(" ")
         
         let humTemp = json[KeyHumidity] as? String
         let humidity = humTemp?.componentsSeparatedByString(" ").last
