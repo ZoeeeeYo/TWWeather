@@ -46,7 +46,7 @@ class Venue: NSObject {
     private(set) var sport: Sport?
     private(set) var weatherCondition: WeatherCondition?
     private(set) var wind: String?
-    private(set) var humidity: Double?
+    private(set) var humidity: String?
     private(set) var temperature: Double?
     private(set) var feelLike: Double?
     private(set) var lastUpdated: NSDate?
@@ -57,7 +57,7 @@ class Venue: NSObject {
         sport: Sport?,
         weatherCondition: WeatherCondition?,
         wind: String?,
-        humidity: Double?,
+        humidity: String?,
         temperature: Double?,
         feelLike: Double?,
         lastUpdated: NSDate?) {
@@ -96,9 +96,23 @@ class Venue: NSObject {
         }
         
         let wind = json[KeyWind] as? String
-        let humidity = json[KeyHumidity] as? Double
-        let temperature = json[KeyTemperature] as? Double
-        let feelLike = json[KeyFeelLike] as? Double
+        
+        let humTemp = json[KeyHumidity] as? String
+        let humidity = humTemp?.componentsSeparatedByString(" ").last
+        
+        let temperature: Double?
+        if let temTemp = json[KeyTemperature] as? String {
+            temperature = Double(temTemp)
+        } else {
+            temperature = nil
+        }
+        
+        let feelLike: Double?
+        if let feelTemp = json[KeyFeelLike] as? String {
+            feelLike = Double(feelTemp)
+        } else {
+            feelLike = nil
+        }
         
         let lastUpdated: NSDate?
         if let timeStamp = json[KeyLastUpdated] as? Double {

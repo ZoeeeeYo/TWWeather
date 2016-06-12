@@ -46,10 +46,10 @@ extension NSDate {
         return "a moment ago"
     }
     
-//    var toString: String {
-//        let formatter = NSDateFormatter()
-//        formatter.dateFormat = "HH:mm "
-//        
-//    }
+    var toDateString: String {
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "HH:mm dd/MM/YYYY"
+        return formatter.stringFromDate(self)
+    }
 }
 

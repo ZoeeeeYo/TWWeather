@@ -16,15 +16,39 @@ enum SortType {
 
 class VenuesTableViewController: UITableViewController {
     let VenuesTableViewCellIdentifier = "VenuesTableViewCell"
+    let URL: String = "http://dnu5embx6omws.cloudfront.net/venues/weather.json"
     
     @IBOutlet weak var sortSegControl: UISegmentedControl!
-    
+    private var customRefreshController: UIRefreshControl!
     private var venueArray: [Venue] = []
     private var sortType: SortType = .Alphabetically
 
     override func viewDidLoad() {
         super.viewDidLoad()
         sortType = .Alphabetically
+        
+        // Refresh control.
+        customRefreshController = UIRefreshControl()
+        customRefreshController.attributedTitle = NSAttributedString(string: "Drag down to refresh")
+        customRefreshController.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)
+        refreshControl = customRefreshController
+        loadData()
+    }
+    
+    func refresh() {
+        loadData()
+    }
+    
+    func loadData() {
+        customRefreshController.beginRefreshing()
+        let _ = try? NetworkManager.loadVenuesFromUrl(URL) { venueArray in
+            print(venueArray?.count)
+            if let venueArray = venueArray {
+                self.venueArray = venueArray
+            }
+            self.tableView.reloadData()
+            self.customRefreshController.endRefreshing()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,20 +59,27 @@ class VenuesTableViewController: UITableViewController {
     // MARK: - Table view data source
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return venueArray.count
     }
-
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 65
+    }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(VenuesTableViewCellIdentifier, forIndexPath: indexPath)
-        
+        if let c = cell as? VenuesTableViewCell {
+            c.updateCell(venueArray[indexPath.row]);
+//            c.populateWith(forumGroups[indexPath.section][indexPath.row], delegate: self)
+        }
         return cell
     }
+    
     
     @IBAction func sortSegmentPressed (sender: UISegmentedControl!) {
         switch sender.selectedSegmentIndex {
@@ -61,35 +92,9 @@ class VenuesTableViewController: UITableViewController {
             default:
                 break;
         }
+        self.tableView.reloadData()
     }
-    
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
 
     /*
     // Override to support conditional rearranging of the table view.

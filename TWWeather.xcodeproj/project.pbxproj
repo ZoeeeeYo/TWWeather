@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		187881F01D0BDBBF0095DBD5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187881EF1D0BDBBF0095DBD5 /* AppDelegate.swift */; };
-		187881F21D0BDBBF0095DBD5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187881F11D0BDBBF0095DBD5 /* ViewController.swift */; };
 		187881F51D0BDBBF0095DBD5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 187881F31D0BDBBF0095DBD5 /* Main.storyboard */; };
 		187881F71D0BDBBF0095DBD5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 187881F61D0BDBBF0095DBD5 /* Assets.xcassets */; };
 		187881FA1D0BDBBF0095DBD5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 187881F81D0BDBBF0095DBD5 /* LaunchScreen.storyboard */; };
@@ -44,7 +43,6 @@
 /* Begin PBXFileReference section */
 		187881EC1D0BDBBF0095DBD5 /* TWWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TWWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		187881EF1D0BDBBF0095DBD5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		187881F11D0BDBBF0095DBD5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		187881F41D0BDBBF0095DBD5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		187881F61D0BDBBF0095DBD5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		187881F91D0BDBBF0095DBD5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -118,7 +116,6 @@
 				1878821D1D0BDDF50095DBD5 /* Networking */,
 				187882291D0C1C870095DBD5 /* View Controller */,
 				187881EF1D0BDBBF0095DBD5 /* AppDelegate.swift */,
-				187881F11D0BDBBF0095DBD5 /* ViewController.swift */,
 				187881F31D0BDBBF0095DBD5 /* Main.storyboard */,
 				187881F61D0BDBBF0095DBD5 /* Assets.xcassets */,
 				187881F81D0BDBBF0095DBD5 /* LaunchScreen.storyboard */,
@@ -315,7 +312,6 @@
 				1878822D1D0C1CD80095DBD5 /* VenuesTableViewController.swift in Sources */,
 				187882281D0BFEE20095DBD5 /* NetworkManager.swift in Sources */,
 				187882241D0BE7DF0095DBD5 /* Sport.swift in Sources */,
-				187881F21D0BDBBF0095DBD5 /* ViewController.swift in Sources */,
 				187882221D0BE2E60095DBD5 /* Country.swift in Sources */,
 				1878822F1D0C1CEF0095DBD5 /* VenuesTableViewCell.swift in Sources */,
 				187881F01D0BDBBF0095DBD5 /* AppDelegate.swift in Sources */,

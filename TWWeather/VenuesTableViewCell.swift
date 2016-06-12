@@ -28,7 +28,8 @@ class VenuesTableViewCell: UITableViewCell {
         }
         
         if let date = venue.lastUpdated {
-            dateLabel.text = date.getElapsedInterval()
+//            dateLabel.text = date.getElapsedInterval()
+            dateLabel.text = date.toDateString
         } else {
             dateLabel.text = VenuesTableViewCell.NotAvailable
         }
