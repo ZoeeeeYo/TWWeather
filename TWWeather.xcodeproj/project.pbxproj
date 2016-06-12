@@ -18,6 +18,10 @@
 		187882221D0BE2E60095DBD5 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187882211D0BE2E60095DBD5 /* Country.swift */; };
 		187882241D0BE7DF0095DBD5 /* Sport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187882231D0BE7DF0095DBD5 /* Sport.swift */; };
 		187882281D0BFEE20095DBD5 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187882271D0BFEE20095DBD5 /* NetworkManager.swift */; };
+		1878822D1D0C1CD80095DBD5 /* VenuesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1878822C1D0C1CD80095DBD5 /* VenuesTableViewController.swift */; };
+		1878822F1D0C1CEF0095DBD5 /* VenuesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1878822E1D0C1CEF0095DBD5 /* VenuesTableViewCell.swift */; };
+		187882331D0C293D0095DBD5 /* NSDate+Convert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187882321D0C293D0095DBD5 /* NSDate+Convert.swift */; };
+		187882351D0C2D3A0095DBD5 /* WeatherDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187882341D0C2D3A0095DBD5 /* WeatherDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +59,10 @@
 		187882211D0BE2E60095DBD5 /* Country.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		187882231D0BE7DF0095DBD5 /* Sport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sport.swift; sourceTree = "<group>"; };
 		187882271D0BFEE20095DBD5 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		1878822C1D0C1CD80095DBD5 /* VenuesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenuesTableViewController.swift; sourceTree = "<group>"; };
+		1878822E1D0C1CEF0095DBD5 /* VenuesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenuesTableViewCell.swift; sourceTree = "<group>"; };
+		187882321D0C293D0095DBD5 /* NSDate+Convert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Convert.swift"; sourceTree = "<group>"; };
+		187882341D0C2D3A0095DBD5 /* WeatherDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,9 +113,10 @@
 		187881EE1D0BDBBF0095DBD5 /* TWWeather */ = {
 			isa = PBXGroup;
 			children = (
+				187882311D0C25DC0095DBD5 /* Categories */,
 				1878821E1D0BE0DF0095DBD5 /* Model */,
-				187882261D0BE80B0095DBD5 /* Parser */,
 				1878821D1D0BDDF50095DBD5 /* Networking */,
+				187882291D0C1C870095DBD5 /* View Controller */,
 				187881EF1D0BDBBF0095DBD5 /* AppDelegate.swift */,
 				187881F11D0BDBBF0095DBD5 /* ViewController.swift */,
 				187881F31D0BDBBF0095DBD5 /* Main.storyboard */,
@@ -154,11 +163,22 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		187882261D0BE80B0095DBD5 /* Parser */ = {
+		187882291D0C1C870095DBD5 /* View Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1878822C1D0C1CD80095DBD5 /* VenuesTableViewController.swift */,
+				1878822E1D0C1CEF0095DBD5 /* VenuesTableViewCell.swift */,
+				187882341D0C2D3A0095DBD5 /* WeatherDetailViewController.swift */,
 			);
-			name = Parser;
+			name = "View Controller";
+			sourceTree = "<group>";
+		};
+		187882311D0C25DC0095DBD5 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				187882321D0C293D0095DBD5 /* NSDate+Convert.swift */,
+			);
+			name = Categories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -292,11 +312,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1878822D1D0C1CD80095DBD5 /* VenuesTableViewController.swift in Sources */,
 				187882281D0BFEE20095DBD5 /* NetworkManager.swift in Sources */,
 				187882241D0BE7DF0095DBD5 /* Sport.swift in Sources */,
 				187881F21D0BDBBF0095DBD5 /* ViewController.swift in Sources */,
 				187882221D0BE2E60095DBD5 /* Country.swift in Sources */,
+				1878822F1D0C1CEF0095DBD5 /* VenuesTableViewCell.swift in Sources */,
 				187881F01D0BDBBF0095DBD5 /* AppDelegate.swift in Sources */,
+				187882331D0C293D0095DBD5 /* NSDate+Convert.swift in Sources */,
+				187882351D0C2D3A0095DBD5 /* WeatherDetailViewController.swift in Sources */,
 				187882201D0BE1110095DBD5 /* Venue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
