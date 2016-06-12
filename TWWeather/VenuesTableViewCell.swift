@@ -17,9 +17,12 @@ class VenuesTableViewCell: UITableViewCell {
     @IBOutlet weak var temeratureLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var weatherIconImage: UIImageView!
+    @IBOutlet weak var countryLabel: UILabel!
+    
     
     func updateCell(venue: Venue) {
-       self.venueLabel.text = venue.venueName
+        self.venueLabel.text = venue.venueName
+        self.countryLabel.text = venue.country.name
         
         if let tem = venue.temperature {
             temeratureLabel.text = "\(tem)" + VenuesTableViewCell.TemUnit

@@ -35,6 +35,11 @@ class VenuesTableViewController: UITableViewController {
         loadData()
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    ///MARK: - Load data
     func refresh() {
         loadData()
     }
@@ -51,19 +56,12 @@ class VenuesTableViewController: UITableViewController {
         }
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    // MARK: - Table view data source
+    /// MARK: - Table view data source
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return venueArray.count
     }
     
@@ -75,7 +73,6 @@ class VenuesTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier(VenuesTableViewCellIdentifier, forIndexPath: indexPath)
         if let c = cell as? VenuesTableViewCell {
             c.updateCell(venueArray[indexPath.row]);
-//            c.populateWith(forumGroups[indexPath.section][indexPath.row], delegate: self)
         }
         return cell
     }
@@ -87,31 +84,35 @@ class VenuesTableViewController: UITableViewController {
                 sortType = .Alphabetically
             case 1:
                 sortType = .Temperature
+                sortByTemperature()
             case 2:
                 sortType = .UpdateDate
+                sortByDate()
             default:
                 break;
         }
         self.tableView.reloadData()
     }
 
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
+    /// MARK: Helpers for data sort
+    private func sortByTemperature() {
+        venueArray.sortInPlace { (a, b) -> Bool in
+            return a.temperature > b.temperature
+        }
     }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    private func sortByDate() {
+        venueArray.sortInPlace { (a, b) -> Bool in
+            if let _ = a.lastUpdated where b.lastUpdated == nil {
+                return true
+            }
+            if let _ = b.lastUpdated where a.lastUpdated == nil {
+                return false
+            }
+            if let aLast = a.lastUpdated, bLast = b.lastUpdated {
+                return aLast.compare(bLast) == NSComparisonResult.OrderedDescending
+            }
+            return true
+        }
     }
-    */
-
 }
