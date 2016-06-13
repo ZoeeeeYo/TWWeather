@@ -35,7 +35,7 @@ class WeatherDetailViewController: UIViewController {
         // TOCO: weather condition
         
         if let tem = venue.temperature {
-            temperatureLabel.text = "\(tem)" + VenuesTableViewCell.TemUnit
+            temperatureLabel.text = "\(Int(tem))"
         } else {
             temperatureLabel.text = VenuesTableViewCell.NotAvailable
         }

@@ -14,26 +14,48 @@ enum SortType {
     case UpdateDate
 }
 
-class VenuesTableViewController: UITableViewController {
+class VenuesTableViewController: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     let VenuesTableViewCellIdentifier = "VenuesTableViewCell"
     let URL: String = "http://dnu5embx6omws.cloudfront.net/venues/weather.json"
     let VenuesTableViewCellSegue: String = "VenuesTableViewCellSegue"
+    let AllPickerRowTitle = "All"
     
     @IBOutlet weak var sortSegControl: UISegmentedControl!
+    var filterPickerView: UIPickerView = UIPickerView()
     private var customRefreshController: UIRefreshControl!
     private var venueArray: [Venue] = []
+    private var countryNameArray: [String] = []
+    private var weatherConditionArray: [String] = []
     private var sortType: SortType = .Alphabetically
+    private var selectedCountry: String = ""
+    private var selectedWeatherCondition: String = ""
+    private var screenWidth: CGFloat = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        sortType = .Alphabetically
+//        sortType = .Alphabetically
         
-        // Refresh control.
+        // Refresh control
         customRefreshController = UIRefreshControl()
         customRefreshController.attributedTitle = NSAttributedString(string: "Drag down to refresh")
         customRefreshController.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)
         refreshControl = customRefreshController
         loadData()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        screenWidth = view.frame.size.width
+        
+        // Set up picker
+        self.filterPickerView.hidden = true
+        self.filterPickerView.dataSource = self
+        self.filterPickerView.delegate = self
+        self.filterPickerView.frame = CGRectMake(0, view.frame.size.height - 350, screenWidth, 350)
+        self.filterPickerView.backgroundColor = UIColor.whiteColor()
+        self.filterPickerView.layer.borderColor = UIColor.whiteColor().CGColor
+        self.filterPickerView.layer.borderWidth = 1
+        view.addSubview(filterPickerView)
     }
     
     override func didReceiveMemoryWarning() {
@@ -64,6 +86,8 @@ class VenuesTableViewController: UITableViewController {
             self.customRefreshController.endRefreshing()
         }
     }
+    
+    
 
     /// MARK: - Table view data source
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -91,6 +115,59 @@ class VenuesTableViewController: UITableViewController {
         performSegueWithIdentifier(VenuesTableViewCellSegue, sender: indexPath)
     }
     
+    /// MARK: - Picker view data source
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 2
+    }
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if component == 0 {
+            return countryNameArray.count
+        } else {
+            return weatherConditionArray.count
+        }
+    }
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+        if component == 0 {
+            if row > 0 {
+                return countryNameArray[row - 1] as String
+            } else {
+                return AllPickerRowTitle
+            }
+        } else {
+            if row > 0 {
+                return weatherConditionArray[row - 1] as String
+            } else {
+                return AllPickerRowTitle
+            }
+        }
+    }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if component == 0 {
+            if row > 0 {
+                selectedCountry = countryNameArray[row - 1] as String
+            } else {
+                selectedCountry = ""
+            }
+        } else {
+            if row > 0 {
+                selectedWeatherCondition = weatherConditionArray[row - 1] as String
+            } else {
+                selectedWeatherCondition = ""
+            }
+        }
+    }
+    
+    func pickerView(pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
+        return screenWidth/2
+    }
+    
+    func pickerView(pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        return 36.0
+    }
+    
     
     ///MARK: - IBActions
     
@@ -111,6 +188,15 @@ class VenuesTableViewController: UITableViewController {
     }
     
     @IBAction func filterButtonPressed (sender: UIBarButtonItem) {
+        
+        if filterPickerView.hidden == true {
+            filterPickerView.hidden = false
+        } else {
+            filterPickerView.hidden = true
+        }
+        
+        
+        
 //        let actionSheetController: UIAlertController = UIAlertController(title: "Filtered By", message: "", preferredStyle: .ActionSheet)
 //        
 //        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .Cancel) { action -> Void in

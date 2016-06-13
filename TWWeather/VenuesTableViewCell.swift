@@ -25,7 +25,7 @@ class VenuesTableViewCell: UITableViewCell {
         self.countryLabel.text = venue.country.name
         
         if let tem = venue.temperature {
-            temperatureLabel.text = "\(tem)" + VenuesTableViewCell.TemUnit
+            temperatureLabel.text = "\(Int(tem))" + VenuesTableViewCell.TemUnit
         } else {
             temperatureLabel.text = VenuesTableViewCell.NotAvailable
         }
