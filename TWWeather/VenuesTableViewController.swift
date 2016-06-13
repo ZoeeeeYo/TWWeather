@@ -33,8 +33,10 @@ class VenuesTableViewController: UIViewController, UITableViewDataSource, UITabl
     private var sortedWeatherConditionArray: [WeatherCondition] = []
     private var selectedCountry: Country?
     private var selectedWeatherCondition: WeatherCondition?
-    private var themeColor: UIColor = UIColor.init(red: 0.035, green: 0.655, blue: 0.565, alpha: 1.00)
-    private var backgroundColor: UIColor = UIColor.init(red: 0.035, green: 0.655, blue: 0.565, alpha: 1.00)
+    
+    
+    private var themeColor: UIColor = UIColor.init(red: 0.129, green: 0.471, blue: 0.812, alpha: 1.00)
+    private var backgroundColor: UIColor = UIColor.init(red: 0.169, green: 0.596, blue: 0.941, alpha: 1.00)
 
     override func viewDidLoad() {
         super.viewDidLoad()
