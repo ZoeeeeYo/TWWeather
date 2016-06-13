@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1902" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="5pN-9A-waN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1904" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="5pN-9A-waN">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
@@ -135,30 +135,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="LrK-cu-cx9" secondAttribute="trailing" id="1zt-Ht-hPU"/>
-                            <constraint firstItem="LrK-cu-cx9" firstAttribute="leading" secondItem="H1X-Qq-qWo" secondAttribute="leadingMargin" id="8KS-72-fIM"/>
-                            <constraint firstItem="bmP-wS-gfB" firstAttribute="width" secondItem="H1X-Qq-qWo" secondAttribute="width" id="GDh-bH-E3Z"/>
                             <constraint firstItem="nsx-9l-aRR" firstAttribute="top" secondItem="LrK-cu-cx9" secondAttribute="bottom" id="MRT-1d-wEU"/>
-                            <constraint firstItem="LrK-cu-cx9" firstAttribute="centerY" secondItem="H1X-Qq-qWo" secondAttribute="centerY" id="RA4-J0-gMy"/>
                             <constraint firstItem="bmP-wS-gfB" firstAttribute="centerX" secondItem="H1X-Qq-qWo" secondAttribute="centerX" id="ZRN-ge-WsZ"/>
                             <constraint firstItem="bmP-wS-gfB" firstAttribute="top" secondItem="1vu-oC-bYH" secondAttribute="bottom" id="a8e-Nj-iaC"/>
                             <constraint firstItem="LrK-cu-cx9" firstAttribute="width" secondItem="H1X-Qq-qWo" secondAttribute="width" id="bff-Pr-YJm"/>
                             <constraint firstItem="LrK-cu-cx9" firstAttribute="centerX" secondItem="H1X-Qq-qWo" secondAttribute="centerX" id="f3a-Nt-mPs"/>
                             <constraint firstItem="bmP-wS-gfB" firstAttribute="leading" secondItem="H1X-Qq-qWo" secondAttribute="leadingMargin" id="feM-gc-hWB"/>
                             <constraint firstItem="bmP-wS-gfB" firstAttribute="bottom" secondItem="LrK-cu-cx9" secondAttribute="top" id="hzv-gV-cHk"/>
-                            <constraint firstItem="LrK-cu-cx9" firstAttribute="top" secondItem="1vu-oC-bYH" secondAttribute="bottom" id="k8F-Qz-F6p"/>
-                            <constraint firstItem="LrK-cu-cx9" firstAttribute="height" secondItem="H1X-Qq-qWo" secondAttribute="height" id="o8e-gW-kvL"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="GDh-bH-E3Z"/>
-                                <exclude reference="1zt-Ht-hPU"/>
-                                <exclude reference="8KS-72-fIM"/>
-                                <exclude reference="RA4-J0-gMy"/>
-                                <exclude reference="k8F-Qz-F6p"/>
-                                <exclude reference="o8e-gW-kvL"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="oXZ-tA-9x7">
                         <barButtonItem key="rightBarButtonItem" title="Filter" id="b3P-nV-5qL">
@@ -168,13 +152,14 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="sortSegControl" destination="ubx-vY-oxy" id="deq-Mt-2eJ"/>
                         <outlet property="tableView" destination="LrK-cu-cx9" id="UrD-Fu-5XH"/>
                         <segue destination="FhE-dG-lCz" kind="show" identifier="VenuesTableViewCellSegue" id="csG-V1-uB7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uJW-91-Sjm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1831" y="604"/>
+            <point key="canvasLocation" x="1839" y="811"/>
         </scene>
         <!--Weather Detail View Controller-->
         <scene sceneID="f83-5F-mUx">

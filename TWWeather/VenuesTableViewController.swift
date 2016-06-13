@@ -22,6 +22,7 @@ class VenuesTableViewController: UIViewController, UITableViewDataSource, UITabl
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var sortSegControl: UISegmentedControl!
+    
     var filterPickerView: UIPickerView = UIPickerView()
     var toolBar: UIToolbar  = UIToolbar()
     private var customRefreshController: UIRefreshControl!
@@ -35,7 +36,6 @@ class VenuesTableViewController: UIViewController, UITableViewDataSource, UITabl
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        sortType = .Alphabetically
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -143,6 +143,7 @@ class VenuesTableViewController: UIViewController, UITableViewDataSource, UITabl
             }
             return filter
         })
+        sortFilteredVenueArray()
         tableView.reloadData()
     }
     
@@ -159,7 +160,11 @@ class VenuesTableViewController: UIViewController, UITableViewDataSource, UITabl
 
     /// MARK: - Table view data source
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        if filteredVenueArray.count > 0 {
+            return 1
+        } else {
+            return 0
+        }
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -182,7 +187,6 @@ class VenuesTableViewController: UIViewController, UITableViewDataSource, UITabl
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         performSegueWithIdentifier(VenuesTableViewCellSegue, sender: indexPath)
     }
-    
     
     /// MARK: - Picker view data source
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
@@ -245,13 +249,12 @@ class VenuesTableViewController: UIViewController, UITableViewDataSource, UITabl
             sortType = .Alphabetically
         case 1:
             sortType = .Temperature
-            sortByTemperature()
         case 2:
             sortType = .UpdateDate
-            sortByDate()
         default:
             break;
         }
+        sortFilteredVenueArray()
         self.tableView.reloadData()
     }
 
@@ -261,6 +264,22 @@ class VenuesTableViewController: UIViewController, UITableViewDataSource, UITabl
     
 
     /// MARK: Helpers for data sort
+    private func sortFilteredVenueArray() {
+        if sortType == .Alphabetically {
+            sortByAlphabet()
+        } else if sortType == .Temperature {
+            sortByTemperature()
+        } else {
+            sortByDate()
+        }
+    }
+    
+    private func sortByAlphabet() {
+        filteredVenueArray.sortInPlace { (a, b) -> Bool in
+            return a.venueName < b.venueName
+        }
+    }
+    
     private func sortByTemperature() {
         filteredVenueArray.sortInPlace { (a, b) -> Bool in
             return a.temperature > b.temperature
