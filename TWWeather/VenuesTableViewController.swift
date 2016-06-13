@@ -33,12 +33,16 @@ class VenuesTableViewController: UIViewController, UITableViewDataSource, UITabl
     private var sortedWeatherConditionArray: [WeatherCondition] = []
     private var selectedCountry: Country?
     private var selectedWeatherCondition: WeatherCondition?
+    private var themeColor: UIColor = UIColor.init(red: 0.035, green: 0.655, blue: 0.565, alpha: 1.00)
+    private var backgroundColor: UIColor = UIColor.init(red: 0.035, green: 0.655, blue: 0.565, alpha: 1.00)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.delegate = self
         tableView.dataSource = self
+        
+        sortSegControl.tintColor = themeColor
         
         // Refresh control
         customRefreshController = UIRefreshControl()
@@ -51,14 +55,15 @@ class VenuesTableViewController: UIViewController, UITableViewDataSource, UITabl
         filterPickerView.hidden = true
         filterPickerView.dataSource = self
         filterPickerView.delegate = self
-        filterPickerView.backgroundColor = UIColor.whiteColor()
-        filterPickerView.layer.borderColor = UIColor.whiteColor().CGColor
+        filterPickerView.backgroundColor = backgroundColor
+        filterPickerView.layer.borderColor = backgroundColor.CGColor
         filterPickerView.layer.borderWidth = 1
         
         toolBar.hidden = true
         toolBar.barStyle = UIBarStyle.Default
         toolBar.translucent = false
-        toolBar.tintColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1)
+        toolBar.tintColor = themeColor
+        toolBar.layer.borderColor = themeColor.CGColor
         toolBar.sizeToFit()
         let goButton = UIBarButtonItem(title: "Go", style: UIBarButtonItemStyle.Plain, target: self, action: "didPressGoButton")
         let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
@@ -73,8 +78,8 @@ class VenuesTableViewController: UIViewController, UITableViewDataSource, UITabl
         super.viewDidLayoutSubviews()
         
         let screenWidth = view.frame.size.width
-        filterPickerView.frame = CGRectMake(0, view.frame.size.height - 300, screenWidth, 300)
-        toolBar.frame = CGRectMake(0, view.frame.size.height - 350, screenWidth, 50)
+        filterPickerView.frame = CGRectMake(0, view.frame.size.height - 200, screenWidth, 200)
+        toolBar.frame = CGRectMake(0, view.frame.size.height - 250, screenWidth, 50)
     }
     
     override func didReceiveMemoryWarning() {

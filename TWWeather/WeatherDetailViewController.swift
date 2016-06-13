@@ -24,6 +24,7 @@ class WeatherDetailViewController: UIViewController {
         super.viewDidLoad()
 //        view.backgroundColor = UIColor.backGroundColour
         navigationItem.title = venue.venueName + "/" + venue.country.name
+        view.sendSubviewToBack(weatherIcon)
         
         if let date = venue.lastUpdated {
 //            dateLabel.text = date.getElapsedInterval()
@@ -32,7 +33,11 @@ class WeatherDetailViewController: UIViewController {
             lastUpdateLabel.text = VenuesTableViewCell.NotAvailable
         }
         
-        // TOCO: weather condition
+        if let con = venue.weatherCondition {
+            weatherConditionLabel.text = con.rawValue
+        } else {
+            weatherConditionLabel.text = VenuesTableViewCell.NotAvailable
+        }
         
         if let tem = venue.temperature {
             temperatureLabel.text = "\(Int(tem))"
@@ -60,6 +65,8 @@ class WeatherDetailViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    
+    @IBAction func backButtonPressed() {
+        navigationController!.popViewControllerAnimated(true)
+    }
 
 }
