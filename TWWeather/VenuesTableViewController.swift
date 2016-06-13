@@ -14,48 +14,67 @@ enum SortType {
     case UpdateDate
 }
 
-class VenuesTableViewController: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class VenuesTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     let VenuesTableViewCellIdentifier = "VenuesTableViewCell"
     let URL: String = "http://dnu5embx6omws.cloudfront.net/venues/weather.json"
     let VenuesTableViewCellSegue: String = "VenuesTableViewCellSegue"
     let AllPickerRowTitle = "All"
     
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var sortSegControl: UISegmentedControl!
     var filterPickerView: UIPickerView = UIPickerView()
+    var toolBar: UIToolbar  = UIToolbar()
     private var customRefreshController: UIRefreshControl!
     private var venueArray: [Venue] = []
-    private var countryNameArray: [String] = []
-    private var weatherConditionArray: [String] = []
+    private var filteredVenueArray: [Venue] = []
     private var sortType: SortType = .Alphabetically
-    private var selectedCountry: String = ""
-    private var selectedWeatherCondition: String = ""
-    private var screenWidth: CGFloat = 0
+    private var sortedCountryArray: [Country] = []
+    private var sortedWeatherConditionArray: [WeatherCondition] = []
+    private var selectedCountry: Country?
+    private var selectedWeatherCondition: WeatherCondition?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 //        sortType = .Alphabetically
         
+        tableView.delegate = self
+        tableView.dataSource = self
+        
         // Refresh control
         customRefreshController = UIRefreshControl()
         customRefreshController.attributedTitle = NSAttributedString(string: "Drag down to refresh")
         customRefreshController.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)
-        refreshControl = customRefreshController
+        tableView.addSubview(customRefreshController)
         loadData()
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(true)
-        screenWidth = view.frame.size.width
         
         // Set up picker
-        self.filterPickerView.hidden = true
-        self.filterPickerView.dataSource = self
-        self.filterPickerView.delegate = self
-        self.filterPickerView.frame = CGRectMake(0, view.frame.size.height - 350, screenWidth, 350)
-        self.filterPickerView.backgroundColor = UIColor.whiteColor()
-        self.filterPickerView.layer.borderColor = UIColor.whiteColor().CGColor
-        self.filterPickerView.layer.borderWidth = 1
+        filterPickerView.hidden = true
+        filterPickerView.dataSource = self
+        filterPickerView.delegate = self
+        filterPickerView.backgroundColor = UIColor.whiteColor()
+        filterPickerView.layer.borderColor = UIColor.whiteColor().CGColor
+        filterPickerView.layer.borderWidth = 1
+        
+        toolBar.hidden = true
+        toolBar.barStyle = UIBarStyle.Default
+        toolBar.translucent = false
+        toolBar.tintColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1)
+        toolBar.sizeToFit()
+        let goButton = UIBarButtonItem(title: "Go", style: UIBarButtonItemStyle.Plain, target: self, action: "didPressGoButton")
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: "togglePicker")
+        toolBar.setItems([cancelButton, spaceButton, goButton], animated: false)
+        toolBar.userInteractionEnabled = true
         view.addSubview(filterPickerView)
+        view.addSubview(toolBar)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        let screenWidth = view.frame.size.width
+        filterPickerView.frame = CGRectMake(0, view.frame.size.height - 300, screenWidth, 300)
+        toolBar.frame = CGRectMake(0, view.frame.size.height - 350, screenWidth, 50)
     }
     
     override func didReceiveMemoryWarning() {
@@ -65,7 +84,7 @@ class VenuesTableViewController: UITableViewController, UIPickerViewDelegate, UI
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == VenuesTableViewCellSegue {
             if let indexPath = sender as? NSIndexPath, detailVC:WeatherDetailViewController = segue.destinationViewController as? WeatherDetailViewController {
-                detailVC.venue = venueArray[indexPath.row]
+                detailVC.venue = filteredVenueArray[indexPath.row]
             }
         }
     }
@@ -82,38 +101,88 @@ class VenuesTableViewController: UITableViewController, UIPickerViewDelegate, UI
             if let venueArray = venueArray {
                 self.venueArray = venueArray
             }
-            self.tableView.reloadData()
+//            self.tableView.reloadData()
             self.customRefreshController.endRefreshing()
+            self.processPickerData()
+            self.filterTableData()
         }
     }
     
+    /// MARK: - Process picker data
+    func processPickerData() {
+        var countrySet: Set<Country> = Set()
+        var weatherConditionSet: Set<WeatherCondition> = Set()
+        
+        venueArray.forEach({
+            countrySet.insert($0.country)
+            
+            if let weatherCondition = $0.weatherCondition {
+                weatherConditionSet.insert(weatherCondition)
+            }
+        })
+        sortedCountryArray = countrySet.sort { $0.name < $1.name }
+        sortedWeatherConditionArray = weatherConditionSet.sort { $0.rawValue < $1.rawValue}
+        filterPickerView.reloadAllComponents()
+    }
     
+    
+    /// MARK: - Filter
+    func didPressGoButton() {
+        filterTableData()
+        togglePicker()
+    }
+    
+    func filterTableData() {
+        filteredVenueArray = venueArray.filter({
+            var filter = true
+            if let selectedCountry = selectedCountry {
+                filter = $0.country == selectedCountry
+            }
+            if filter, let selectedWeatherCondition = selectedWeatherCondition {
+                filter = $0.weatherCondition == selectedWeatherCondition
+            }
+            return filter
+        })
+        tableView.reloadData()
+    }
+    
+    func togglePicker() {
+        if filterPickerView.hidden {
+            filterPickerView.hidden = false
+            toolBar.hidden = false
+        } else {
+            filterPickerView.hidden = true
+            toolBar.hidden = true
+        }
+        filterPickerView.setNeedsLayout()
+    }
 
     /// MARK: - Table view data source
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return venueArray.count
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return filteredVenueArray.count
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 65
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(VenuesTableViewCellIdentifier, forIndexPath: indexPath)
         if let c = cell as? VenuesTableViewCell {
-            c.updateCell(venueArray[indexPath.row]);
+            c.updateCell(filteredVenueArray[indexPath.row]);
         }
         return cell
     }
     
     /// MARK: - Table view delegate
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         performSegueWithIdentifier(VenuesTableViewCellSegue, sender: indexPath)
     }
+    
     
     /// MARK: - Picker view data source
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
@@ -122,22 +191,22 @@ class VenuesTableViewController: UITableViewController, UIPickerViewDelegate, UI
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if component == 0 {
-            return countryNameArray.count
+            return sortedCountryArray.count
         } else {
-            return weatherConditionArray.count
+            return sortedWeatherConditionArray.count
         }
     }
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if component == 0 {
             if row > 0 {
-                return countryNameArray[row - 1] as String
+                return sortedCountryArray[row - 1].name
             } else {
                 return AllPickerRowTitle
             }
         } else {
             if row > 0 {
-                return weatherConditionArray[row - 1] as String
+                return sortedWeatherConditionArray[row - 1].rawValue
             } else {
                 return AllPickerRowTitle
             }
@@ -147,21 +216,21 @@ class VenuesTableViewController: UITableViewController, UIPickerViewDelegate, UI
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if component == 0 {
             if row > 0 {
-                selectedCountry = countryNameArray[row - 1] as String
+                selectedCountry = sortedCountryArray[row - 1]
             } else {
-                selectedCountry = ""
+                selectedCountry = nil
             }
         } else {
             if row > 0 {
-                selectedWeatherCondition = weatherConditionArray[row - 1] as String
+                selectedWeatherCondition = sortedWeatherConditionArray[row - 1]
             } else {
-                selectedWeatherCondition = ""
+                selectedWeatherCondition = nil
             }
         }
     }
     
     func pickerView(pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
-        return screenWidth/2
+        return pickerView.frame.width/2
     }
     
     func pickerView(pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
@@ -170,65 +239,36 @@ class VenuesTableViewController: UITableViewController, UIPickerViewDelegate, UI
     
     
     ///MARK: - IBActions
-    
-    @IBAction func sortSegmentPressed (sender: UISegmentedControl!) {
+    @IBAction func sortSegmentPressed(sender: AnyObject) {
         switch sender.selectedSegmentIndex {
-            case 0:
-                sortType = .Alphabetically
-            case 1:
-                sortType = .Temperature
-                sortByTemperature()
-            case 2:
-                sortType = .UpdateDate
-                sortByDate()
-            default:
-                break;
+        case 0:
+            sortType = .Alphabetically
+        case 1:
+            sortType = .Temperature
+            sortByTemperature()
+        case 2:
+            sortType = .UpdateDate
+            sortByDate()
+        default:
+            break;
         }
         self.tableView.reloadData()
     }
-    
+
     @IBAction func filterButtonPressed (sender: UIBarButtonItem) {
-        
-        if filterPickerView.hidden == true {
-            filterPickerView.hidden = false
-        } else {
-            filterPickerView.hidden = true
-        }
-        
-        
-        
-//        let actionSheetController: UIAlertController = UIAlertController(title: "Filtered By", message: "", preferredStyle: .ActionSheet)
-//        
-//        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .Cancel) { action -> Void in
-//        }
-//        actionSheetController.addAction(cancelAction)
-//        let byCountry: UIAlertAction = UIAlertAction(title: "Country", style: .Default) { action -> Void in
-//            //Code for launching the camera goes here
-//        }
-//        actionSheetController.addAction(byCountry)
-//        
-//        let byWeather: UIAlertAction = UIAlertAction(title: "Weather", style: .Default) { action -> Void in
-//            //Code for picking from camera roll goes here
-//        }
-//        actionSheetController.addAction(byWeather)
-//        
-//        //Present the AlertController
-//        self.presentViewController(actionSheetController, animated: true, completion: nil)
-        
-        
-        
+        togglePicker()
     }
     
 
     /// MARK: Helpers for data sort
     private func sortByTemperature() {
-        venueArray.sortInPlace { (a, b) -> Bool in
+        filteredVenueArray.sortInPlace { (a, b) -> Bool in
             return a.temperature > b.temperature
         }
     }
     
     private func sortByDate() {
-        venueArray.sortInPlace { (a, b) -> Bool in
+        filteredVenueArray.sortInPlace { (a, b) -> Bool in
             if let _ = a.lastUpdated where b.lastUpdated == nil {
                 return true
             }

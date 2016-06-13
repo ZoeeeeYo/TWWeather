@@ -8,22 +8,31 @@
 
 import UIKit
 
-class Country: NSObject {
+class Country: Hashable {
     static let KeyCountryId = "_countryID"
     static let KeyCountryName = "_name"
     
-    private(set) var countryId: String
+    private(set) var countryId: Int
     private(set) var name: String
     
-    init(countryId: String, name: String) {
+    init(countryId: Int, name: String) {
         self.countryId = countryId
         self.name = name
     }
     
     static func fromJSON(json: [String: AnyObject]) -> Country? {
-        guard let countryId = json[KeyCountryId] as? String,
+        guard let countryIdString = json[KeyCountryId] as? String,
+            countryId = Int(countryIdString),
             name = json[KeyCountryName] as? String
             else { return nil }
         return Country(countryId: countryId, name: name)
     }
+    
+    var hashValue: Int {
+        return countryId
+    }
+}
+
+func ==(lhs: Country, rhs: Country) -> Bool {
+    return lhs.countryId == rhs.countryId
 }
