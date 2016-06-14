@@ -19,13 +19,21 @@ class WeatherDetailViewController: UIViewController {
     @IBOutlet weak var windLabel: UILabel!
     @IBOutlet weak var humidityLabel: UILabel!
     
+    @IBOutlet weak var temperatureView: UIView!
+    @IBOutlet weak var weatherView: UIView!
+    @IBOutlet weak var humidityView: UIView!
+    @IBOutlet weak var windView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 //        view.backgroundColor = UIColor.backGroundColour
         navigationItem.title = venue.venueName + "/" + venue.country.name
         view.sendSubviewToBack(weatherIcon)
-        view.backgroundColor = UIColor.init(red: 0.961, green: 0.961, blue: 0.961, alpha: 1.00)
+        view.backgroundColor = UIColor.weatherDetailBackgroundColour
+        weatherView.backgroundColor = UIColor.weatherDetailBackgroundColour
+        temperatureView.backgroundColor = UIColor.weatherDetailBackgroundColour
+        windView.backgroundColor = UIColor.weatherDetailBackgroundColour
+        humidityView.backgroundColor = UIColor.weatherDetailBackgroundColour
         
         if let date = venue.lastUpdated {
 //            dateLabel.text = date.getElapsedInterval()

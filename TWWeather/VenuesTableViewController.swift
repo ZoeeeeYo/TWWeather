@@ -34,16 +34,13 @@ class VenuesTableViewController: UIViewController, UITableViewDataSource, UITabl
     private var selectedCountry: Country?
     private var selectedWeatherCondition: WeatherCondition?
     
-    private var themeColor: UIColor = UIColor.init(red: 0.129, green: 0.471, blue: 0.812, alpha: 1.00)
-    private var backgroundColor: UIColor = UIColor.init(red: 0.890, green: 0.949, blue: 0.988, alpha: 1.00)
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.delegate = self
         tableView.dataSource = self
         
-        sortSegControl.tintColor = themeColor
+        sortSegControl.tintColor = UIColor.themeColour
         
         // Refresh control
         customRefreshController = UIRefreshControl()
@@ -56,15 +53,15 @@ class VenuesTableViewController: UIViewController, UITableViewDataSource, UITabl
         filterPickerView.hidden = true
         filterPickerView.dataSource = self
         filterPickerView.delegate = self
-        filterPickerView.backgroundColor = backgroundColor
-        filterPickerView.layer.borderColor = backgroundColor.CGColor
+        filterPickerView.backgroundColor = UIColor.pickerBackgroundColour
+        filterPickerView.layer.borderColor = UIColor.pickerBackgroundColour.CGColor
         filterPickerView.layer.borderWidth = 1
         
         toolBar.hidden = true
         toolBar.barStyle = UIBarStyle.Default
         toolBar.translucent = false
-        toolBar.tintColor = themeColor
-        toolBar.layer.borderColor = themeColor.CGColor
+        toolBar.tintColor = UIColor.themeColour
+        toolBar.layer.borderColor = UIColor.themeColour.CGColor
         toolBar.sizeToFit()
         let goButton = UIBarButtonItem(title: "Go", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(VenuesTableViewController.didPressGoButton))
         let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
