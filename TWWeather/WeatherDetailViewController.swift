@@ -25,6 +25,7 @@ class WeatherDetailViewController: UIViewController {
 //        view.backgroundColor = UIColor.backGroundColour
         navigationItem.title = venue.venueName + "/" + venue.country.name
         view.sendSubviewToBack(weatherIcon)
+        view.backgroundColor = UIColor.init(red: 0.961, green: 0.961, blue: 0.961, alpha: 1.00)
         
         if let date = venue.lastUpdated {
 //            dateLabel.text = date.getElapsedInterval()

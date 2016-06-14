@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1904" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="5pN-9A-waN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="5pN-9A-waN">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -20,10 +20,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bmP-wS-gfB">
-                                <rect key="frame" x="20" y="64" width="560" height="65"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="65"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ubx-vY-oxy">
-                                        <rect key="frame" x="8" y="15" width="544" height="36"/>
+                                        <rect key="frame" x="8" y="15" width="584" height="36"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="Jf6-Vo-glM"/>
                                         </constraints>
@@ -140,7 +140,7 @@
                             <constraint firstItem="bmP-wS-gfB" firstAttribute="top" secondItem="1vu-oC-bYH" secondAttribute="bottom" id="a8e-Nj-iaC"/>
                             <constraint firstItem="LrK-cu-cx9" firstAttribute="width" secondItem="H1X-Qq-qWo" secondAttribute="width" id="bff-Pr-YJm"/>
                             <constraint firstItem="LrK-cu-cx9" firstAttribute="centerX" secondItem="H1X-Qq-qWo" secondAttribute="centerX" id="f3a-Nt-mPs"/>
-                            <constraint firstItem="bmP-wS-gfB" firstAttribute="leading" secondItem="H1X-Qq-qWo" secondAttribute="leadingMargin" id="feM-gc-hWB"/>
+                            <constraint firstItem="bmP-wS-gfB" firstAttribute="leading" secondItem="H1X-Qq-qWo" secondAttribute="leading" id="feM-gc-hWB"/>
                             <constraint firstItem="bmP-wS-gfB" firstAttribute="bottom" secondItem="LrK-cu-cx9" secondAttribute="top" id="hzv-gV-cHk"/>
                         </constraints>
                     </view>

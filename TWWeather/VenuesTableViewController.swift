@@ -34,10 +34,9 @@ class VenuesTableViewController: UIViewController, UITableViewDataSource, UITabl
     private var selectedCountry: Country?
     private var selectedWeatherCondition: WeatherCondition?
     
-    
     private var themeColor: UIColor = UIColor.init(red: 0.129, green: 0.471, blue: 0.812, alpha: 1.00)
-    private var backgroundColor: UIColor = UIColor.init(red: 0.169, green: 0.596, blue: 0.941, alpha: 1.00)
-
+    private var backgroundColor: UIColor = UIColor.init(red: 0.890, green: 0.949, blue: 0.988, alpha: 1.00)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,7 +48,7 @@ class VenuesTableViewController: UIViewController, UITableViewDataSource, UITabl
         // Refresh control
         customRefreshController = UIRefreshControl()
         customRefreshController.attributedTitle = NSAttributedString(string: "Drag down to refresh")
-        customRefreshController.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)
+        customRefreshController.addTarget(self, action: #selector(VenuesTableViewController.refresh), forControlEvents: UIControlEvents.ValueChanged)
         tableView.addSubview(customRefreshController)
         loadData()
         
@@ -67,9 +66,9 @@ class VenuesTableViewController: UIViewController, UITableViewDataSource, UITabl
         toolBar.tintColor = themeColor
         toolBar.layer.borderColor = themeColor.CGColor
         toolBar.sizeToFit()
-        let goButton = UIBarButtonItem(title: "Go", style: UIBarButtonItemStyle.Plain, target: self, action: "didPressGoButton")
+        let goButton = UIBarButtonItem(title: "Go", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(VenuesTableViewController.didPressGoButton))
         let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: "togglePicker")
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(VenuesTableViewController.togglePicker))
         toolBar.setItems([cancelButton, spaceButton, goButton], animated: false)
         toolBar.userInteractionEnabled = true
         view.addSubview(filterPickerView)

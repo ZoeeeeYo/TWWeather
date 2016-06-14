@@ -39,6 +39,8 @@ class VenuesTableViewCell: UITableViewCell {
     }
 
     override func awakeFromNib() {
+//        self.selectionStyle = 
+        self.selectedBackgroundView?.backgroundColor = UIColor.init(red: 0.890, green: 0.949, blue: 0.988, alpha: 1.00)
         super.awakeFromNib()
     }
 
