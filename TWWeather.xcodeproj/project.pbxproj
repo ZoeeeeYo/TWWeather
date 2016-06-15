@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		184022151D118D6800E0475A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 184021FC1D118D6800E0475A /* Assets.xcassets */; };
 		187881F01D0BDBBF0095DBD5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187881EF1D0BDBBF0095DBD5 /* AppDelegate.swift */; };
 		187881F51D0BDBBF0095DBD5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 187881F31D0BDBBF0095DBD5 /* Main.storyboard */; };
-		187881F71D0BDBBF0095DBD5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 187881F61D0BDBBF0095DBD5 /* Assets.xcassets */; };
 		187881FA1D0BDBBF0095DBD5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 187881F81D0BDBBF0095DBD5 /* LaunchScreen.storyboard */; };
 		187882051D0BDBBF0095DBD5 /* TWWeatherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187882041D0BDBBF0095DBD5 /* TWWeatherTests.swift */; };
 		187882101D0BDBBF0095DBD5 /* TWWeatherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1878820F1D0BDBBF0095DBD5 /* TWWeatherUITests.swift */; };
@@ -42,10 +42,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		184021FC1D118D6800E0475A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../../.Trash/Assets.xcassets; sourceTree = "<group>"; };
 		187881EC1D0BDBBF0095DBD5 /* TWWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TWWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		187881EF1D0BDBBF0095DBD5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		187881F41D0BDBBF0095DBD5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		187881F61D0BDBBF0095DBD5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		187881F91D0BDBBF0095DBD5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		187881FB1D0BDBBF0095DBD5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		187882001D0BDBBF0095DBD5 /* TWWeatherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TWWeatherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,8 +118,8 @@
 				1878821D1D0BDDF50095DBD5 /* Networking */,
 				187882291D0C1C870095DBD5 /* View Controller */,
 				187881EF1D0BDBBF0095DBD5 /* AppDelegate.swift */,
+				184021FC1D118D6800E0475A /* Assets.xcassets */,
 				187881F31D0BDBBF0095DBD5 /* Main.storyboard */,
-				187881F61D0BDBBF0095DBD5 /* Assets.xcassets */,
 				187881F81D0BDBBF0095DBD5 /* LaunchScreen.storyboard */,
 				187881FB1D0BDBBF0095DBD5 /* Info.plist */,
 			);
@@ -286,7 +286,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				187881FA1D0BDBBF0095DBD5 /* LaunchScreen.storyboard in Resources */,
-				187881F71D0BDBBF0095DBD5 /* Assets.xcassets in Resources */,
+				184022151D118D6800E0475A /* Assets.xcassets in Resources */,
 				187881F51D0BDBBF0095DBD5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -548,6 +548,7 @@
 				187882161D0BDBBF0095DBD5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		187882171D0BDBBF0095DBD5 /* Build configuration list for PBXNativeTarget "TWWeatherTests" */ = {
 			isa = XCConfigurationList;
@@ -556,6 +557,7 @@
 				187882191D0BDBBF0095DBD5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1878821A1D0BDBBF0095DBD5 /* Build configuration list for PBXNativeTarget "TWWeatherUITests" */ = {
 			isa = XCConfigurationList;
@@ -564,6 +566,7 @@
 				1878821C1D0BDBBF0095DBD5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
