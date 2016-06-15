@@ -36,6 +36,13 @@ class VenuesTableViewCell: UITableViewCell {
         } else {
             dateLabel.text = VenuesTableViewCell.NotAvailable
         }
+        
+        if let condition = venue.weatherCondition {
+            weatherIconImage.image = UIImage(named: condition.rawValue)
+        } else {
+            weatherIconImage.image = nil
+        }
+        
     }
 
     override func awakeFromNib() {

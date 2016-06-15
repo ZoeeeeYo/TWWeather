@@ -55,7 +55,13 @@ class WeatherDetailViewController: UIViewController {
         }
         
         //TODO: weather icon
+        if let condition = venue.weatherCondition {
+            weatherIcon.image = UIImage(named: condition.rawValue)
+        } else {
+            weatherIcon.image = nil
+        }
         
+        // Wind and humidity
         if let wind = venue.wind {
             windLabel.text = wind
         } else {
