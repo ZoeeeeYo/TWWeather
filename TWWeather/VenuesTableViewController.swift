@@ -42,11 +42,20 @@ class VenuesTableViewController: UIViewController, UITableViewDataSource, UITabl
         
         sortSegControl.tintColor = UIColor.themeColour
         
-        // Refresh control
+        // config refresh controller
         customRefreshController = UIRefreshControl()
-        customRefreshController.attributedTitle = NSAttributedString(string: "Drag down to refresh")
+        let lastUpdateDate = PersistencyManager.getLastUpdatedDate()
+        var message = ""
+        if let date = lastUpdateDate {
+            message = "Last updated: " + date.getElapsedInterval() + " ago"
+        } else {
+            message = "Drag down to refresh"
+        }
+        customRefreshController.attributedTitle = NSAttributedString(string: message)
         customRefreshController.addTarget(self, action: #selector(VenuesTableViewController.refresh), forControlEvents: UIControlEvents.ValueChanged)
         tableView.addSubview(customRefreshController)
+        
+        // Load data
         loadData()
         
         // Set up picker
@@ -98,14 +107,17 @@ class VenuesTableViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func loadData() {
+        
+        
+        
         customRefreshController.beginRefreshing()
         let _ = try? NetworkManager.loadVenuesFromUrl(URL) { venueArray in
             print(venueArray?.count)
             if let venueArray = venueArray {
                 self.venueArray = venueArray
             }
-//            self.tableView.reloadData()
             self.customRefreshController.endRefreshing()
+            PersistencyManager.storeLastUpdatedDate(NSDate())
             self.processPickerData()
             self.filterTableData()
         }

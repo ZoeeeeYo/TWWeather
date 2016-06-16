@@ -23,6 +23,7 @@
 		187882351D0C2D3A0095DBD5 /* WeatherDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187882341D0C2D3A0095DBD5 /* WeatherDetailViewController.swift */; };
 		187882371D0D2F8D0095DBD5 /* UIColor+TWColour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187882361D0D2F8D0095DBD5 /* UIColor+TWColour.swift */; };
 		188B6E551D12B54A00C81C32 /* UIView+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188B6E541D12B54A00C81C32 /* UIView+Animation.swift */; };
+		188B6E581D12BEB600C81C32 /* PersistencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188B6E571D12BEB600C81C32 /* PersistencyManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		187882341D0C2D3A0095DBD5 /* WeatherDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherDetailViewController.swift; sourceTree = "<group>"; };
 		187882361D0D2F8D0095DBD5 /* UIColor+TWColour.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+TWColour.swift"; sourceTree = "<group>"; };
 		188B6E541D12B54A00C81C32 /* UIView+Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Animation.swift"; sourceTree = "<group>"; };
+		188B6E571D12BEB600C81C32 /* PersistencyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistencyManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 		187881EE1D0BDBBF0095DBD5 /* TWWeather */ = {
 			isa = PBXGroup;
 			children = (
+				188B6E561D12BE9C00C81C32 /* Managers */,
 				187882311D0C25DC0095DBD5 /* Categories */,
 				1878821E1D0BE0DF0095DBD5 /* Model */,
 				1878821D1D0BDDF50095DBD5 /* Networking */,
@@ -182,6 +185,14 @@
 				188B6E541D12B54A00C81C32 /* UIView+Animation.swift */,
 			);
 			name = Categories;
+			sourceTree = "<group>";
+		};
+		188B6E561D12BE9C00C81C32 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				188B6E571D12BEB600C81C32 /* PersistencyManager.swift */,
+			);
+			name = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -322,6 +333,7 @@
 				187882371D0D2F8D0095DBD5 /* UIColor+TWColour.swift in Sources */,
 				1878822F1D0C1CEF0095DBD5 /* VenuesTableViewCell.swift in Sources */,
 				187881F01D0BDBBF0095DBD5 /* AppDelegate.swift in Sources */,
+				188B6E581D12BEB600C81C32 /* PersistencyManager.swift in Sources */,
 				187882331D0C293D0095DBD5 /* NSDate+Convert.swift in Sources */,
 				187882351D0C2D3A0095DBD5 /* WeatherDetailViewController.swift in Sources */,
 				188B6E551D12B54A00C81C32 /* UIView+Animation.swift in Sources */,
