@@ -26,8 +26,23 @@ class WeatherDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        view.backgroundColor = UIColor.backGroundColour
         navigationItem.title = venue.venueName + "/" + venue.country.name
+        
+        // Add tap gestures
+        let tapWeatherView = UITapGestureRecognizer.init(target: self, action: #selector(weatherConditionViewTapped(_:)))
+        weatherView.addGestureRecognizer(tapWeatherView)
+        
+        let tapTemperature = UITapGestureRecognizer.init(target: self, action: #selector(temperatureViewTapped(_:)))
+        temperatureView.addGestureRecognizer(tapTemperature)
+        
+        let tapWind = UITapGestureRecognizer.init(target: self, action: #selector(windViewTapped(_:)))
+        windView.addGestureRecognizer(tapWind)
+        
+        let tapHumidity = UITapGestureRecognizer.init(target: self, action: #selector(humidityViewTapped(_:)))
+        humidityView.addGestureRecognizer(tapHumidity)
+        
+        
+        // Config background colour
         view.sendSubviewToBack(weatherIcon)
         view.backgroundColor = UIColor.weatherDetailBackgroundColour
         weatherView.backgroundColor = UIColor.weatherDetailBackgroundColour
@@ -35,8 +50,17 @@ class WeatherDetailViewController: UIViewController {
         windView.backgroundColor = UIColor.weatherDetailBackgroundColour
         humidityView.backgroundColor = UIColor.weatherDetailBackgroundColour
         
+        // Load view data
+        updateViewForVenue()
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    private func updateViewForVenue() {
         if let date = venue.lastUpdated {
-//            dateLabel.text = date.getElapsedInterval()
+            //            dateLabel.text = date.getElapsedInterval()
             lastUpdateLabel.text = date.toDateString
         } else {
             lastUpdateLabel.text = VenuesTableViewCell.NotAvailable
@@ -54,7 +78,7 @@ class WeatherDetailViewController: UIViewController {
             temperatureLabel.text = VenuesTableViewCell.NotAvailable
         }
         
-        //TODO: weather icon
+        //weather icon
         if let condition = venue.weatherCondition {
             weatherIcon.image = UIImage(named: condition.rawValue)
         } else {
@@ -73,13 +97,54 @@ class WeatherDetailViewController: UIViewController {
         } else {
             humidityLabel.text = VenuesTableViewCell.NotAvailable
         }
-        
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    
+//    func viewTapped(sender: UITapGestureRecognizer) {
+//        
+//        let scaleAnimation = CABasicAnimation(keyPath: "transform.scale")
+//        scaleAnimation.fromValue = 1.0
+//        scaleAnimation.timingFunction = CAMediaTimingFunction.init(name: kCAMediaTimingFunctionEaseInEaseOut)
+//        scaleAnimation.toValue = 1.4
+//        scaleAnimation.duration = 0.3
+//        scaleAnimation.repeatCount = 0
+//        scaleAnimation.autoreverses = true;
+//        scaleAnimation.removedOnCompletion = true;
+//        scaleAnimation.fillMode = kCAFillModeForwards;
+//        temperatureLabel.layer.addAnimation(scaleAnimation, forKey: "Float")
+//    }
+    
+    /// MARK: - Add animations when views tapped
+    func weatherConditionViewTapped(sender: UITapGestureRecognizer) {
+        addScaleAnimationToView(weatherConditionLabel, fromValue: 1.0, toValue: 1.4, duration: 0.3)
     }
     
+    func temperatureViewTapped(sender: UITapGestureRecognizer) {
+        addScaleAnimationToView(temperatureLabel, fromValue: 1.0, toValue: 1.4, duration: 0.3)
+    }
+    
+    func windViewTapped(sender: UITapGestureRecognizer) {
+        addScaleAnimationToView(windLabel, fromValue: 1.0, toValue: 1.4, duration: 0.3)
+    }
+    
+    func humidityViewTapped(sender: UITapGestureRecognizer) {
+        addScaleAnimationToView(humidityLabel, fromValue: 1.0, toValue: 1.4, duration: 0.3)
+    }
+    
+    private func addScaleAnimationToView(view: UIView, fromValue: Double, toValue: Double, duration: Double) {
+        let scaleAnimation = CABasicAnimation(keyPath: "transform.scale")
+        scaleAnimation.fromValue = fromValue
+        scaleAnimation.timingFunction = CAMediaTimingFunction.init(name: kCAMediaTimingFunctionEaseInEaseOut)
+        scaleAnimation.toValue = toValue
+        scaleAnimation.duration = duration
+        scaleAnimation.repeatCount = 0
+        scaleAnimation.autoreverses = true;
+        scaleAnimation.removedOnCompletion = true;
+        scaleAnimation.fillMode = kCAFillModeForwards;
+        view.layer.addAnimation(scaleAnimation, forKey: "Float")
+    }
+    
+    /// MARK: - IBactions
     @IBAction func backButtonPressed() {
         navigationController!.popViewControllerAnimated(true)
     }
