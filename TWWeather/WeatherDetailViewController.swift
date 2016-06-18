@@ -16,6 +16,7 @@ class WeatherDetailViewController: UIViewController {
     @IBOutlet weak var weatherConditionLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var weatherIcon: UIImageView!
+    @IBOutlet weak var feelLikeLabel: UILabel!
     @IBOutlet weak var windLabel: UILabel!
     @IBOutlet weak var humidityLabel: UILabel!
     
@@ -88,6 +89,12 @@ class WeatherDetailViewController: UIViewController {
             temperatureLabel.text = "\(Int(tem))"
         } else {
             temperatureLabel.text = VenuesTableViewCell.NotAvailable
+        }
+        
+        if let feel = venue.feelLike {
+            feelLikeLabel.text = "Feel like: " + "\(Int(feel))"
+        } else {
+            feelLikeLabel.text = "Feel like: " + VenuesTableViewCell.NotAvailable 
         }
         
         //weather icon

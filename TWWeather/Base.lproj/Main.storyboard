@@ -207,10 +207,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MpF-tr-fKc" userLabel="CW View">
-                                <rect key="frame" x="0.0" y="389" width="600" height="100"/>
+                                <rect key="frame" x="0.0" y="379" width="600" height="110"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RwJ-jb-7np" userLabel="Celsius View">
-                                        <rect key="frame" x="355" y="1" width="244.5" height="98"/>
+                                        <rect key="frame" x="355" y="1" width="244.5" height="108"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Celsius" translatesAutoresizingMaskIntoConstraints="NO" id="4Z1-ea-b6U">
                                                 <rect key="frame" x="204" y="8" width="30" height="30"/>
@@ -219,10 +219,19 @@
                                                     <constraint firstAttribute="height" constant="30" id="ZMj-SH-GM4"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="PD1-fU-MV5">
-                                                <rect key="frame" x="5" y="0.0" width="191.5" height="98"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="18" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="PD1-fU-MV5">
+                                                <rect key="frame" x="5" y="0.0" width="191.5" height="79"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="80"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4zP-vZ-MXI">
+                                                <rect key="frame" x="0.0" y="85" width="191.5" height="18"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="18" id="hdI-uF-7W5"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
+                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -231,13 +240,21 @@
                                             <constraint firstItem="4Z1-ea-b6U" firstAttribute="leading" secondItem="PD1-fU-MV5" secondAttribute="trailing" constant="8" id="1Pp-Ie-dIj"/>
                                             <constraint firstItem="4Z1-ea-b6U" firstAttribute="top" secondItem="RwJ-jb-7np" secondAttribute="top" constant="8" id="3RR-HD-aOZ"/>
                                             <constraint firstAttribute="trailing" secondItem="4Z1-ea-b6U" secondAttribute="trailing" constant="10" id="CQF-h4-UBN"/>
+                                            <constraint firstAttribute="bottom" secondItem="4zP-vZ-MXI" secondAttribute="bottom" constant="5" id="Vf4-Kx-QKY"/>
                                             <constraint firstItem="PD1-fU-MV5" firstAttribute="leading" secondItem="RwJ-jb-7np" secondAttribute="leading" constant="5" id="ce1-rH-Mve"/>
                                             <constraint firstItem="PD1-fU-MV5" firstAttribute="top" secondItem="RwJ-jb-7np" secondAttribute="top" id="i4S-wN-2r7"/>
+                                            <constraint firstItem="4zP-vZ-MXI" firstAttribute="leading" secondItem="RwJ-jb-7np" secondAttribute="leading" id="noG-Eg-RBR"/>
+                                            <constraint firstItem="4zP-vZ-MXI" firstAttribute="width" secondItem="PD1-fU-MV5" secondAttribute="width" id="pj4-nL-7c2"/>
                                             <constraint firstAttribute="bottom" secondItem="PD1-fU-MV5" secondAttribute="bottom" id="qjD-rz-Sj7"/>
                                         </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="qjD-rz-Sj7"/>
+                                            </mask>
+                                        </variation>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0ir-bK-0BG" userLabel="Weather View">
-                                        <rect key="frame" x="0.0" y="1" width="354.5" height="98"/>
+                                        <rect key="frame" x="0.0" y="1" width="354.5" height="108"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weather Condition" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mrn-jH-MVk">
                                                 <rect key="frame" x="121" y="5" width="112.5" height="21"/>
@@ -249,7 +266,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Partly Cloudy" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RFU-Tr-Psr">
-                                                <rect key="frame" x="8" y="34" width="338.5" height="29.5"/>
+                                                <rect key="frame" x="8" y="39" width="338.5" height="29.5"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="2QM-V2-7Du"/>
                                                     <constraint firstAttribute="width" constant="143" id="Jms-FB-LYS"/>
@@ -285,7 +302,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="0ir-bK-0BG" secondAttribute="bottom" constant="1" id="9fW-Wq-YdJ"/>
-                                    <constraint firstAttribute="height" constant="100" id="AMW-oi-3OA"/>
+                                    <constraint firstAttribute="height" constant="110" id="AMW-oi-3OA"/>
                                     <constraint firstItem="RwJ-jb-7np" firstAttribute="top" secondItem="MpF-tr-fKc" secondAttribute="top" constant="1" id="Ejl-XS-aEg"/>
                                     <constraint firstItem="RwJ-jb-7np" firstAttribute="leading" secondItem="0ir-bK-0BG" secondAttribute="trailing" constant="1" id="Hdy-YP-kat"/>
                                     <constraint firstItem="0ir-bK-0BG" firstAttribute="width" secondItem="MpF-tr-fKc" secondAttribute="width" multiplier="13:22" id="LIV-2b-IRD"/>
@@ -316,7 +333,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Clear" translatesAutoresizingMaskIntoConstraints="NO" id="Gn5-c0-IFR">
-                                <rect key="frame" x="30" y="112" width="540" height="262"/>
+                                <rect key="frame" x="30" y="112" width="540" height="252"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Gn5-c0-IFR" secondAttribute="height" multiplier="1:1" id="dhy-Gq-w31"/>
                                 </constraints>
@@ -472,6 +489,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="feelLikeLabel" destination="4zP-vZ-MXI" id="3xT-ny-TIb"/>
                         <outlet property="humidityLabel" destination="7U0-6i-0ZL" id="yjO-a9-Ndb"/>
                         <outlet property="humidityView" destination="ERb-dD-YdY" id="abS-x2-bK3"/>
                         <outlet property="lastUpdateLabel" destination="JpL-px-ao3" id="vkg-Ma-60E"/>
