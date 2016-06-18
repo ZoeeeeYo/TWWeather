@@ -10,13 +10,13 @@ import Foundation
 import UIKit
 
 extension UIColor {
-    
-    static var pickerBackgroundColour: UIColor {
-        return UIColor.init(red: 0.890, green: 0.949, blue: 0.988, alpha: 1.00)
-    }
-    
+
     static var themeColour: UIColor {
         return UIColor.init(red: 0.267, green: 0.541, blue: 1.000, alpha: 1.00)
+    }
+    
+    static var pickerTopBarColour: UIColor {
+        return UIColor.init(red: 0.878, green: 0.878, blue: 0.878, alpha: 1.00)
     }
     
     static var weatherDetailBackgroundColour: UIColor {

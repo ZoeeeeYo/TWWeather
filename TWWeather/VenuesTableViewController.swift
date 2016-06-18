@@ -18,6 +18,7 @@ class VenuesTableViewController: UIViewController, UITableViewDataSource, UITabl
     let VenuesTableViewCellIdentifier = "VenuesTableViewCell"
     let URL: String = "http://dnu5embx6omws.cloudfront.net/venues/weather.json"
     let VenuesTableViewCellSegue: String = "VenuesTableViewCellSegue"
+    let ToSearchSegue: String = "ToSearchBarControllerSegue"
     let AllPickerRowTitle = "All"
     
     @IBOutlet weak var tableView: UITableView!
@@ -55,6 +56,29 @@ class VenuesTableViewController: UIViewController, UITableViewDataSource, UITabl
         customRefreshController.addTarget(self, action: #selector(VenuesTableViewController.refresh), forControlEvents: UIControlEvents.ValueChanged)
         tableView.addSubview(customRefreshController)
         
+        // Navigation items
+        
+//        let searchBarButton = UIBarButtonItem.init(image: UIImage.init(named: "Search"),
+//                                                   style: UIBarButtonItemStyle.Done,
+//                                                   target: self,
+//                                                   action: #selector(searchButtonPressed(_:)))
+//        let filterBarButton = UIBarButtonItem.init(image: UIImage.init(named: "Filter"),
+//                                                   style: UIBarButtonItemStyle.Done,
+//                                                   target: self,
+//                                                   action: #selector(filterButtonPressed(_:)))
+        
+        let searchBarButton = UIBarButtonItem.init(title: "Search",
+                                                   style: UIBarButtonItemStyle.Done,
+                                                   target: self,
+                                                   action: #selector(searchButtonPressed(_:)))
+        let filterBarButton = UIBarButtonItem.init(title: "Filter",
+                                                   style: UIBarButtonItemStyle.Done,
+                                                   target: self,
+                                                   action: #selector(filterButtonPressed(_:)))
+        searchBarButton.tintColor = UIColor.whiteColor()
+        filterBarButton.tintColor = UIColor.whiteColor()
+        navigationItem.rightBarButtonItems = [searchBarButton, filterBarButton]
+        
         // Load data
         loadData()
         
@@ -62,21 +86,24 @@ class VenuesTableViewController: UIViewController, UITableViewDataSource, UITabl
         filterPickerView.hidden = true
         filterPickerView.dataSource = self
         filterPickerView.delegate = self
-        filterPickerView.backgroundColor = UIColor.pickerBackgroundColour
-        filterPickerView.layer.borderColor = UIColor.pickerBackgroundColour.CGColor
+        filterPickerView.backgroundColor = UIColor.weatherDetailBackgroundColour
+        filterPickerView.layer.borderColor = UIColor.weatherDetailBackgroundColour.CGColor
         filterPickerView.layer.borderWidth = 1
         
+        // Set up picker tool bar
         toolBar.hidden = true
         toolBar.barStyle = UIBarStyle.Default
         toolBar.translucent = false
         toolBar.tintColor = UIColor.themeColour
-        toolBar.layer.borderColor = UIColor.themeColour.CGColor
+        toolBar.layer.borderColor = UIColor.pickerTopBarColour.CGColor
+        toolBar.barTintColor = UIColor.pickerTopBarColour
         toolBar.sizeToFit()
         let goButton = UIBarButtonItem(title: "Go", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(VenuesTableViewController.didPressGoButton))
         let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
         let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(VenuesTableViewController.togglePicker))
         toolBar.setItems([cancelButton, spaceButton, goButton], animated: false)
         toolBar.userInteractionEnabled = true
+        
         view.addSubview(filterPickerView)
         view.addSubview(toolBar)
     }
@@ -93,10 +120,18 @@ class VenuesTableViewController: UIViewController, UITableViewDataSource, UITabl
         super.didReceiveMemoryWarning()
     }
     
+    /// MARK: - Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == VenuesTableViewCellSegue {
-            if let indexPath = sender as? NSIndexPath, detailVC:WeatherDetailViewController = segue.destinationViewController as? WeatherDetailViewController {
+            if let indexPath = sender as? NSIndexPath,
+                detailVC: WeatherDetailViewController = segue.destinationViewController as? WeatherDetailViewController {
                 detailVC.venue = filteredVenueArray[indexPath.row]
+            }
+        } else if segue.identifier == ToSearchSegue {
+            if let searchVenueVC: SearchVenueTableViewController = segue.destinationViewController as? SearchVenueTableViewController {
+                sortAllDataByAlphabet()
+                searchVenueVC.venueArray = venueArray
+                print(searchVenueVC.venueArray.count)
             }
         }
     }
@@ -107,8 +142,6 @@ class VenuesTableViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func loadData() {
-        
-        
         
         customRefreshController.beginRefreshing()
         let _ = try? NetworkManager.loadVenuesFromUrl(URL) { venueArray in
@@ -173,7 +206,7 @@ class VenuesTableViewController: UIViewController, UITableViewDataSource, UITabl
         filterPickerView.setNeedsLayout()
     }
 
-    /// MARK: - Table view data source
+    /// MARK: - TableView Data Source
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         if filteredVenueArray.count > 0 {
             return 1
@@ -198,12 +231,12 @@ class VenuesTableViewController: UIViewController, UITableViewDataSource, UITabl
         return cell
     }
     
-    /// MARK: - Table view delegate
+    /// MARK: - TableView Delegate
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         performSegueWithIdentifier(VenuesTableViewCellSegue, sender: indexPath)
     }
     
-    /// MARK: - Picker view data source
+    /// MARK: - PickerView Data Source
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 2
     }
@@ -232,6 +265,15 @@ class VenuesTableViewController: UIViewController, UITableViewDataSource, UITabl
         }
     }
     
+    func pickerView(pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
+        return pickerView.frame.width/2
+    }
+    
+    func pickerView(pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        return 36.0
+    }
+    
+    /// MARK: - PickerView Delegate
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if component == 0 {
             if row > 0 {
@@ -248,15 +290,7 @@ class VenuesTableViewController: UIViewController, UITableViewDataSource, UITabl
         }
     }
     
-    func pickerView(pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
-        return pickerView.frame.width/2
-    }
-    
-    func pickerView(pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-        return 36.0
-    }
-    
-    
+
     ///MARK: - IBActions
     @IBAction func sortSegmentPressed(sender: AnyObject) {
         switch sender.selectedSegmentIndex {
@@ -273,8 +307,12 @@ class VenuesTableViewController: UIViewController, UITableViewDataSource, UITabl
         self.tableView.reloadData()
     }
 
-    @IBAction func filterButtonPressed (sender: UIBarButtonItem) {
+    func filterButtonPressed (sender: UIBarButtonItem) {
         togglePicker()
+    }
+    
+    func searchButtonPressed (sender: UIBarButtonItem) {
+        performSegueWithIdentifier(ToSearchSegue, sender: self)
     }
     
 
@@ -313,6 +351,12 @@ class VenuesTableViewController: UIViewController, UITableViewDataSource, UITabl
                 return aLast.compare(bLast) == NSComparisonResult.OrderedDescending
             }
             return true
+        }
+    }
+    
+    private func sortAllDataByAlphabet() {
+        venueArray.sortInPlace { (a, b) -> Bool in
+            return a.venueName < b.venueName && a.country.name < b.country.name
         }
     }
 }

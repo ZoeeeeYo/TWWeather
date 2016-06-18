@@ -26,7 +26,19 @@ class WeatherDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Navi bar title
         navigationItem.title = venue.venueName + "/" + venue.country.name
+//        let backBarButton = UIBarButtonItem.init(image: UIImage.init(named: "BackButton"),
+//                                                   style: UIBarButtonItemStyle.Done,
+//                                                   target: self,
+//                                                   action: #selector(backButtonPressed(_:)))
+        let backBarButton = UIBarButtonItem.init(title: "Back",
+                                                 style: UIBarButtonItemStyle.Done,
+                                                 target: self,
+                                                 action: #selector(backButtonPressed(_:)))
+        backBarButton.tintColor = UIColor.whiteColor()
+        navigationItem.leftBarButtonItem = backBarButton
         
         // Add tap gestures
         let tapWeatherView = UITapGestureRecognizer.init(target: self, action: #selector(weatherConditionViewTapped(_:)))
@@ -100,20 +112,6 @@ class WeatherDetailViewController: UIViewController {
     }
     
     
-//    func viewTapped(sender: UITapGestureRecognizer) {
-//        
-//        let scaleAnimation = CABasicAnimation(keyPath: "transform.scale")
-//        scaleAnimation.fromValue = 1.0
-//        scaleAnimation.timingFunction = CAMediaTimingFunction.init(name: kCAMediaTimingFunctionEaseInEaseOut)
-//        scaleAnimation.toValue = 1.4
-//        scaleAnimation.duration = 0.3
-//        scaleAnimation.repeatCount = 0
-//        scaleAnimation.autoreverses = true;
-//        scaleAnimation.removedOnCompletion = true;
-//        scaleAnimation.fillMode = kCAFillModeForwards;
-//        temperatureLabel.layer.addAnimation(scaleAnimation, forKey: "Float")
-//    }
-    
     /// MARK: - Add animations when views tapped
     func weatherConditionViewTapped(sender: UITapGestureRecognizer) {
         addScaleAnimationToView(weatherConditionLabel, fromValue: 1.0, toValue: 1.4, duration: 0.3)
@@ -145,7 +143,7 @@ class WeatherDetailViewController: UIViewController {
     }
     
     /// MARK: - IBactions
-    @IBAction func backButtonPressed() {
+    func backButtonPressed(sender: UIBarButtonItem) {
         navigationController!.popViewControllerAnimated(true)
     }
 

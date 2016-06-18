@@ -64,7 +64,7 @@
                                                         <constraint firstAttribute="width" constant="180" id="z62-S9-n3E"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temp" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fGb-cz-2eO">
@@ -151,23 +151,48 @@
                             <constraint firstItem="bmP-wS-gfB" firstAttribute="bottom" secondItem="LrK-cu-cx9" secondAttribute="top" id="hzv-gV-cHk"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="oXZ-tA-9x7">
-                        <barButtonItem key="rightBarButtonItem" title="Filter" style="plain" id="b3P-nV-5qL">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <action selector="filterButtonPressed:" destination="zFU-pc-OJr" id="Sju-AQ-gqa"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="oXZ-tA-9x7"/>
                     <connections>
                         <outlet property="sortSegControl" destination="ubx-vY-oxy" id="deq-Mt-2eJ"/>
                         <outlet property="tableView" destination="LrK-cu-cx9" id="UrD-Fu-5XH"/>
                         <segue destination="FhE-dG-lCz" kind="show" identifier="VenuesTableViewCellSegue" id="csG-V1-uB7"/>
+                        <segue destination="lc8-uZ-Ffi" kind="show" identifier="ToSearchBarControllerSegue" id="DSk-Oz-cDr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uJW-91-Sjm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1839" y="811"/>
+        </scene>
+        <!--Search Venue Table View Controller-->
+        <scene sceneID="4ia-cv-M3F">
+            <objects>
+                <tableViewController id="lc8-uZ-Ffi" customClass="SearchVenueTableViewController" customModule="TWWeather" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" id="UMS-Re-Ixb">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchVenueTableViewCell" id="t5h-wf-v6b">
+                                <rect key="frame" x="0.0" y="92" width="600" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="t5h-wf-v6b" id="jvJ-d5-7bO">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="49.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="lc8-uZ-Ffi" id="iR8-2O-s0t"/>
+                            <outlet property="delegate" destination="lc8-uZ-Ffi" id="J3J-ok-wJH"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <segue destination="FhE-dG-lCz" kind="show" identifier="SearchResultToVenueDetailSegue" id="G5E-NW-7WP"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GNZ-BD-lPh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2762" y="334"/>
         </scene>
         <!--Weather Detail View Controller-->
         <scene sceneID="f83-5F-mUx">
@@ -461,7 +486,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lwA-41-QHz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2739" y="811"/>
+            <point key="canvasLocation" x="2762" y="1085"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="f0k-RE-CxP">
@@ -488,4 +513,7 @@
         <image name="Humidity" width="53" height="53"/>
         <image name="Wind" width="60" height="60"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="G5E-NW-7WP"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -24,6 +24,7 @@
 		187882371D0D2F8D0095DBD5 /* UIColor+TWColour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187882361D0D2F8D0095DBD5 /* UIColor+TWColour.swift */; };
 		188B6E551D12B54A00C81C32 /* UIView+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188B6E541D12B54A00C81C32 /* UIView+Animation.swift */; };
 		188B6E581D12BEB600C81C32 /* PersistencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188B6E571D12BEB600C81C32 /* PersistencyManager.swift */; };
+		188B6E5A1D15072700C81C32 /* SearchVenueTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188B6E591D15072700C81C32 /* SearchVenueTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		187882361D0D2F8D0095DBD5 /* UIColor+TWColour.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+TWColour.swift"; sourceTree = "<group>"; };
 		188B6E541D12B54A00C81C32 /* UIView+Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Animation.swift"; sourceTree = "<group>"; };
 		188B6E571D12BEB600C81C32 /* PersistencyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistencyManager.swift; sourceTree = "<group>"; };
+		188B6E591D15072700C81C32 /* SearchVenueTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchVenueTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +175,7 @@
 				1878822C1D0C1CD80095DBD5 /* VenuesTableViewController.swift */,
 				1878822E1D0C1CEF0095DBD5 /* VenuesTableViewCell.swift */,
 				187882341D0C2D3A0095DBD5 /* WeatherDetailViewController.swift */,
+				188B6E591D15072700C81C32 /* SearchVenueTableViewController.swift */,
 			);
 			name = "View Controller";
 			sourceTree = "<group>";
@@ -327,6 +330,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1878822D1D0C1CD80095DBD5 /* VenuesTableViewController.swift in Sources */,
+				188B6E5A1D15072700C81C32 /* SearchVenueTableViewController.swift in Sources */,
 				187882281D0BFEE20095DBD5 /* NetworkManager.swift in Sources */,
 				187882241D0BE7DF0095DBD5 /* Sport.swift in Sources */,
 				187882221D0BE2E60095DBD5 /* Country.swift in Sources */,
