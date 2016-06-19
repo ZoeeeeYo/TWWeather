@@ -30,14 +30,10 @@ class WeatherDetailViewController: UIViewController {
         
         // Navi bar title
         navigationItem.title = venue.venueName + "/" + venue.country.name
-//        let backBarButton = UIBarButtonItem.init(image: UIImage.init(named: "BackButton"),
-//                                                   style: UIBarButtonItemStyle.Done,
-//                                                   target: self,
-//                                                   action: #selector(backButtonPressed(_:)))
-        let backBarButton = UIBarButtonItem.init(title: "Back",
-                                                 style: UIBarButtonItemStyle.Done,
-                                                 target: self,
-                                                 action: #selector(backButtonPressed(_:)))
+        let backBarButton = UIBarButtonItem.init(image: UIImage.backBarButtonImage,
+                                                   style: UIBarButtonItemStyle.Done,
+                                                   target: self,
+                                                   action: #selector(backButtonPressed(_:)))
         backBarButton.tintColor = UIColor.whiteColor()
         navigationItem.leftBarButtonItem = backBarButton
         
@@ -73,48 +69,47 @@ class WeatherDetailViewController: UIViewController {
     
     private func updateViewForVenue() {
         if let date = venue.lastUpdated {
-            //            dateLabel.text = date.getElapsedInterval()
             lastUpdateLabel.text = date.toDateString
         } else {
-            lastUpdateLabel.text = VenuesTableViewCell.NotAvailable
+            lastUpdateLabel.text = NSString.NotAvailableShort
         }
         
         if let con = venue.weatherCondition {
             weatherConditionLabel.text = con.rawValue
         } else {
-            weatherConditionLabel.text = VenuesTableViewCell.NotAvailable
+            weatherConditionLabel.text = NSString.NotAvailableShort
         }
         
         if let tem = venue.temperature {
             temperatureLabel.text = "\(Int(tem))"
         } else {
-            temperatureLabel.text = VenuesTableViewCell.NotAvailable
+            temperatureLabel.text = NSString.NotAvailableShort
         }
         
         if let feel = venue.feelLike {
-            feelLikeLabel.text = "Feel like: " + "\(Int(feel))"
+            feelLikeLabel.text = NSString.FeelLikeLabel + "\(Int(feel))"
         } else {
-            feelLikeLabel.text = "Feel like: " + VenuesTableViewCell.NotAvailable 
+            feelLikeLabel.text = NSString.FeelLikeLabel + NSString.NotAvailableShort
         }
         
         //weather icon
         if let condition = venue.weatherCondition {
             weatherIcon.image = UIImage(named: condition.rawValue)
         } else {
-            weatherIcon.image = nil
+            weatherIcon.image = UIImage.sadFace
         }
         
         // Wind and humidity
         if let wind = venue.wind {
             windLabel.text = wind
         } else {
-            windLabel.text = VenuesTableViewCell.NotAvailable
+            windLabel.text = NSString.NotAvailableShort
         }
         
         if let hum = venue.humidity {
             humidityLabel.text = hum
         } else {
-            humidityLabel.text = VenuesTableViewCell.NotAvailable
+            humidityLabel.text = NSString.NotAvailableShort
         }
     }
     
@@ -153,5 +148,4 @@ class WeatherDetailViewController: UIViewController {
     func backButtonPressed(sender: UIBarButtonItem) {
         navigationController!.popViewControllerAnimated(true)
     }
-
 }

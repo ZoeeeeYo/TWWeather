@@ -10,11 +10,9 @@ import UIKit
 
 enum NetworkErrorType: ErrorType {
     case InvalidURL
-    
 }
 
 class NetworkManager: NSObject {
-    
     static func loadVenuesFromUrl(url: String, block: [Venue]? -> Void) throws {
         if let requestURL = NSURL(string: url) {
             let urlRequest: NSMutableURLRequest = NSMutableURLRequest(URL: requestURL)
@@ -28,7 +26,6 @@ class NetworkManager: NSObject {
                         block(nil)
                         return
                 }
-                
                 print("Everyone is fine, file downloaded successfully.")
                 let jsonArray = response["data"] as? [[String: AnyObject]]
                 let venueArray = jsonArray?.flatMap { Venue.fromJSON($0) }

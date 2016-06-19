@@ -16,10 +16,13 @@ enum SortType {
 
 class VenuesTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     let VenuesTableViewCellIdentifier = "VenuesTableViewCell"
-    let URL: String = "http://dnu5embx6omws.cloudfront.net/venues/weather.json"
     let VenuesTableViewCellSegue: String = "VenuesTableViewCellSegue"
     let ToSearchSegue: String = "ToSearchBarControllerSegue"
     let AllPickerRowTitle = "All"
+    let Ago = " ago"
+    let DragDownToRefresh = "Drag down to refresh"
+    let GoButtonTitle = "Go"
+    let CancelButtonTitle = "Cancel"
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var sortSegControl: UISegmentedControl!
@@ -41,16 +44,17 @@ class VenuesTableViewController: UIViewController, UITableViewDataSource, UITabl
         tableView.delegate = self
         tableView.dataSource = self
         
+        // Config segmented control
         sortSegControl.tintColor = UIColor.themeColour
         
-        // config refresh controller
+        // Config refresh controller
         customRefreshController = UIRefreshControl()
         let lastUpdateDate = PersistencyManager.getLastUpdatedDate()
         var message = ""
         if let date = lastUpdateDate {
-            message = "Last updated: " + date.getElapsedInterval() + " ago"
+            message = NSString.LastUpdatedLabelName + date.getElapsedInterval() + Ago
         } else {
-            message = "Drag down to refresh"
+            message = DragDownToRefresh
         }
         customRefreshController.attributedTitle = NSAttributedString(string: message)
         customRefreshController.addTarget(self, action: #selector(VenuesTableViewController.refresh), forControlEvents: UIControlEvents.ValueChanged)
@@ -58,20 +62,11 @@ class VenuesTableViewController: UIViewController, UITableViewDataSource, UITabl
         
         // Navigation items
         
-//        let searchBarButton = UIBarButtonItem.init(image: UIImage.init(named: "Search"),
-//                                                   style: UIBarButtonItemStyle.Done,
-//                                                   target: self,
-//                                                   action: #selector(searchButtonPressed(_:)))
-//        let filterBarButton = UIBarButtonItem.init(image: UIImage.init(named: "Filter"),
-//                                                   style: UIBarButtonItemStyle.Done,
-//                                                   target: self,
-//                                                   action: #selector(filterButtonPressed(_:)))
-        
-        let searchBarButton = UIBarButtonItem.init(title: "Search",
+        let searchBarButton = UIBarButtonItem.init(image: UIImage.searchBarButtonImage,
                                                    style: UIBarButtonItemStyle.Done,
                                                    target: self,
                                                    action: #selector(searchButtonPressed(_:)))
-        let filterBarButton = UIBarButtonItem.init(title: "Filter",
+        let filterBarButton = UIBarButtonItem.init(image: UIImage.filterBarButtonImage,
                                                    style: UIBarButtonItemStyle.Done,
                                                    target: self,
                                                    action: #selector(filterButtonPressed(_:)))
@@ -98,9 +93,9 @@ class VenuesTableViewController: UIViewController, UITableViewDataSource, UITabl
         toolBar.layer.borderColor = UIColor.pickerTopBarColour.CGColor
         toolBar.barTintColor = UIColor.pickerTopBarColour
         toolBar.sizeToFit()
-        let goButton = UIBarButtonItem(title: "Go", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(VenuesTableViewController.didPressGoButton))
+        let goButton = UIBarButtonItem(title: GoButtonTitle, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(VenuesTableViewController.didPressGoButton))
         let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(VenuesTableViewController.togglePicker))
+        let cancelButton = UIBarButtonItem(title: CancelButtonTitle, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(VenuesTableViewController.togglePicker))
         toolBar.setItems([cancelButton, spaceButton, goButton], animated: false)
         toolBar.userInteractionEnabled = true
         
@@ -131,7 +126,6 @@ class VenuesTableViewController: UIViewController, UITableViewDataSource, UITabl
             if let searchVenueVC: SearchVenueTableViewController = segue.destinationViewController as? SearchVenueTableViewController {
                 sortAllDataByAlphabet()
                 searchVenueVC.venueArray = venueArray
-                print(searchVenueVC.venueArray.count)
             }
         }
     }
@@ -142,17 +136,18 @@ class VenuesTableViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func loadData() {
-        
         customRefreshController.beginRefreshing()
-        let _ = try? NetworkManager.loadVenuesFromUrl(URL) { venueArray in
-            print(venueArray?.count)
+        let _ = try? NetworkManager.loadVenuesFromUrl(NSString.RequestUrl) { [unowned self] venueArray in
             if let venueArray = venueArray {
                 self.venueArray = venueArray
             }
             self.customRefreshController.endRefreshing()
             PersistencyManager.storeLastUpdatedDate(NSDate())
             self.processPickerData()
-            self.filterTableData()
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                self.filterTableData()
+            }
         }
     }
     
@@ -206,11 +201,23 @@ class VenuesTableViewController: UIViewController, UITableViewDataSource, UITabl
         filterPickerView.setNeedsLayout()
     }
 
-    /// MARK: - TableView Data Source
+    // MARK: - TableView Data Source
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         if filteredVenueArray.count > 0 {
+            tableView.backgroundView = nil
+            tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine;
             return 1
         } else {
+            let messageLabel = UILabel.init(frame: CGRectMake(0, 0, self.view.bounds.size.width, 30))
+            messageLabel.text = NSString.VenueTableNoDataMessage
+            messageLabel.numberOfLines = 0
+            messageLabel.textAlignment = NSTextAlignment.Center
+            messageLabel.sizeToFit()
+            if messageLabel.hidden {
+                messageLabel.hidden = false
+            }
+            tableView.backgroundView = messageLabel;
+            tableView.separatorStyle = UITableViewCellSeparatorStyle.None;
             return 0
         }
     }
@@ -225,18 +232,18 @@ class VenuesTableViewController: UIViewController, UITableViewDataSource, UITabl
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(VenuesTableViewCellIdentifier, forIndexPath: indexPath)
-        if let c = cell as? VenuesTableViewCell {
-            c.updateCell(filteredVenueArray[indexPath.row]);
+        if indexPath.row < filteredVenueArray.count, let c = cell as? VenuesTableViewCell {
+                c.updateCell(filteredVenueArray[indexPath.row]);
         }
         return cell
     }
     
-    /// MARK: - TableView Delegate
+    // MARK: - TableView Delegate
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         performSegueWithIdentifier(VenuesTableViewCellSegue, sender: indexPath)
     }
     
-    /// MARK: - PickerView Data Source
+    // MARK: - PickerView Data Source
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 2
     }
@@ -273,7 +280,8 @@ class VenuesTableViewController: UIViewController, UITableViewDataSource, UITabl
         return 36.0
     }
     
-    /// MARK: - PickerView Delegate
+    
+    // MARK: - PickerView Delegate
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if component == 0 {
             if row > 0 {
@@ -291,7 +299,7 @@ class VenuesTableViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
 
-    ///MARK: - IBActions
+    // MARK: - IBActions
     @IBAction func sortSegmentPressed(sender: AnyObject) {
         switch sender.selectedSegmentIndex {
         case 0:
@@ -316,7 +324,7 @@ class VenuesTableViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
 
-    /// MARK: Helpers for data sort
+    // MARK: Helpers for data sort
     private func sortFilteredVenueArray() {
         if sortType == .Alphabetically {
             sortByAlphabet()
@@ -356,7 +364,10 @@ class VenuesTableViewController: UIViewController, UITableViewDataSource, UITabl
     
     private func sortAllDataByAlphabet() {
         venueArray.sortInPlace { (a, b) -> Bool in
-            return a.venueName < b.venueName && a.country.name < b.country.name
+            if a.country.name == b.country.name {
+                return a.venueName < b.venueName
+            }
+            return a.country.name < b.country.name
         }
     }
 }

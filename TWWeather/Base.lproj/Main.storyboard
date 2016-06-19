@@ -219,14 +219,14 @@
                                                     <constraint firstAttribute="height" constant="30" id="ZMj-SH-GM4"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="18" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="PD1-fU-MV5">
-                                                <rect key="frame" x="5" y="0.0" width="191.5" height="79"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="PD1-fU-MV5">
+                                                <rect key="frame" x="5" y="0.0" width="191.5" height="80"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="80"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4zP-vZ-MXI">
-                                                <rect key="frame" x="0.0" y="85" width="191.5" height="18"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="4zP-vZ-MXI">
+                                                <rect key="frame" x="5" y="85" width="191.5" height="18"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="18" id="hdI-uF-7W5"/>
                                                 </constraints>
@@ -243,15 +243,10 @@
                                             <constraint firstAttribute="bottom" secondItem="4zP-vZ-MXI" secondAttribute="bottom" constant="5" id="Vf4-Kx-QKY"/>
                                             <constraint firstItem="PD1-fU-MV5" firstAttribute="leading" secondItem="RwJ-jb-7np" secondAttribute="leading" constant="5" id="ce1-rH-Mve"/>
                                             <constraint firstItem="PD1-fU-MV5" firstAttribute="top" secondItem="RwJ-jb-7np" secondAttribute="top" id="i4S-wN-2r7"/>
-                                            <constraint firstItem="4zP-vZ-MXI" firstAttribute="leading" secondItem="RwJ-jb-7np" secondAttribute="leading" id="noG-Eg-RBR"/>
+                                            <constraint firstItem="4zP-vZ-MXI" firstAttribute="top" secondItem="PD1-fU-MV5" secondAttribute="bottom" constant="5" id="mL4-HB-0qt"/>
+                                            <constraint firstItem="4zP-vZ-MXI" firstAttribute="leading" secondItem="RwJ-jb-7np" secondAttribute="leading" constant="5" id="noG-Eg-RBR"/>
                                             <constraint firstItem="4zP-vZ-MXI" firstAttribute="width" secondItem="PD1-fU-MV5" secondAttribute="width" id="pj4-nL-7c2"/>
-                                            <constraint firstAttribute="bottom" secondItem="PD1-fU-MV5" secondAttribute="bottom" id="qjD-rz-Sj7"/>
                                         </constraints>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="qjD-rz-Sj7"/>
-                                            </mask>
-                                        </variation>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0ir-bK-0BG" userLabel="Weather View">
                                         <rect key="frame" x="0.0" y="1" width="354.5" height="108"/>

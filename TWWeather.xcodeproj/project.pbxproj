@@ -22,9 +22,10 @@
 		187882331D0C293D0095DBD5 /* NSDate+Convert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187882321D0C293D0095DBD5 /* NSDate+Convert.swift */; };
 		187882351D0C2D3A0095DBD5 /* WeatherDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187882341D0C2D3A0095DBD5 /* WeatherDetailViewController.swift */; };
 		187882371D0D2F8D0095DBD5 /* UIColor+TWColour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187882361D0D2F8D0095DBD5 /* UIColor+TWColour.swift */; };
-		188B6E551D12B54A00C81C32 /* UIView+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188B6E541D12B54A00C81C32 /* UIView+Animation.swift */; };
 		188B6E581D12BEB600C81C32 /* PersistencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188B6E571D12BEB600C81C32 /* PersistencyManager.swift */; };
 		188B6E5A1D15072700C81C32 /* SearchVenueTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188B6E591D15072700C81C32 /* SearchVenueTableViewController.swift */; };
+		188B6E5C1D165A3F00C81C32 /* UIImage+Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188B6E5B1D165A3F00C81C32 /* UIImage+Images.swift */; };
+		188B6E5E1D16601600C81C32 /* NSString+Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188B6E5D1D16601600C81C32 /* NSString+Text.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,9 +67,10 @@
 		187882321D0C293D0095DBD5 /* NSDate+Convert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Convert.swift"; sourceTree = "<group>"; };
 		187882341D0C2D3A0095DBD5 /* WeatherDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherDetailViewController.swift; sourceTree = "<group>"; };
 		187882361D0D2F8D0095DBD5 /* UIColor+TWColour.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+TWColour.swift"; sourceTree = "<group>"; };
-		188B6E541D12B54A00C81C32 /* UIView+Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Animation.swift"; sourceTree = "<group>"; };
 		188B6E571D12BEB600C81C32 /* PersistencyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistencyManager.swift; sourceTree = "<group>"; };
 		188B6E591D15072700C81C32 /* SearchVenueTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchVenueTableViewController.swift; sourceTree = "<group>"; };
+		188B6E5B1D165A3F00C81C32 /* UIImage+Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Images.swift"; sourceTree = "<group>"; };
+		188B6E5D1D16601600C81C32 /* NSString+Text.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSString+Text.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,7 +187,8 @@
 			children = (
 				187882321D0C293D0095DBD5 /* NSDate+Convert.swift */,
 				187882361D0D2F8D0095DBD5 /* UIColor+TWColour.swift */,
-				188B6E541D12B54A00C81C32 /* UIView+Animation.swift */,
+				188B6E5B1D165A3F00C81C32 /* UIImage+Images.swift */,
+				188B6E5D1D16601600C81C32 /* NSString+Text.swift */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -330,9 +333,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				1878822D1D0C1CD80095DBD5 /* VenuesTableViewController.swift in Sources */,
+				188B6E5C1D165A3F00C81C32 /* UIImage+Images.swift in Sources */,
 				188B6E5A1D15072700C81C32 /* SearchVenueTableViewController.swift in Sources */,
 				187882281D0BFEE20095DBD5 /* NetworkManager.swift in Sources */,
 				187882241D0BE7DF0095DBD5 /* Sport.swift in Sources */,
+				188B6E5E1D16601600C81C32 /* NSString+Text.swift in Sources */,
 				187882221D0BE2E60095DBD5 /* Country.swift in Sources */,
 				187882371D0D2F8D0095DBD5 /* UIColor+TWColour.swift in Sources */,
 				1878822F1D0C1CEF0095DBD5 /* VenuesTableViewCell.swift in Sources */,
@@ -340,7 +345,6 @@
 				188B6E581D12BEB600C81C32 /* PersistencyManager.swift in Sources */,
 				187882331D0C293D0095DBD5 /* NSDate+Convert.swift in Sources */,
 				187882351D0C2D3A0095DBD5 /* WeatherDetailViewController.swift in Sources */,
-				188B6E551D12B54A00C81C32 /* UIView+Animation.swift in Sources */,
 				187882201D0BE1110095DBD5 /* Venue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

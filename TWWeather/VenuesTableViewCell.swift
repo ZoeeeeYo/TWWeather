@@ -10,8 +10,6 @@ import UIKit
 
 
 class VenuesTableViewCell: UITableViewCell {
-    static let NotAvailable = "N/A"
-    static let TemUnit = "°C"
     
     @IBOutlet weak var venueLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
@@ -19,30 +17,27 @@ class VenuesTableViewCell: UITableViewCell {
     @IBOutlet weak var weatherIconImage: UIImageView!
     @IBOutlet weak var countryLabel: UILabel!
     
-    
     func updateCell(venue: Venue) {
         self.venueLabel.text = venue.venueName
         self.countryLabel.text = venue.country.name
         
         if let tem = venue.temperature {
-            temperatureLabel.text = "\(Int(tem))" + VenuesTableViewCell.TemUnit
+            temperatureLabel.text = "\(Int(tem))" + NSString.TemperatureUnitCelsius
         } else {
-            temperatureLabel.text = VenuesTableViewCell.NotAvailable
+            temperatureLabel.text = NSString.NotAvailableShort
         }
         
         if let date = venue.lastUpdated {
-//            dateLabel.text = date.getElapsedInterval()
             dateLabel.text = date.toDateString
         } else {
-            dateLabel.text = VenuesTableViewCell.NotAvailable
+            dateLabel.text = NSString.NotAvailableShort
         }
         
         if let condition = venue.weatherCondition {
             weatherIconImage.image = UIImage(named: condition.rawValue)
         } else {
-            weatherIconImage.image = nil
+            weatherIconImage.image = UIImage.notAvailableTabelCellIconImage
         }
-        
     }
 
     override func awakeFromNib() {
