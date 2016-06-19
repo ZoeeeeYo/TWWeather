@@ -2,7 +2,7 @@
 //  PersistencyManager.swift
 //  TWWeather
 //
-//  Created by Zoe on 16/06/2016.
+//  Created by Tingting Wen on 16/06/2016.
 //  Copyright © 2016 Tingting Wen. All rights reserved.
 //
 

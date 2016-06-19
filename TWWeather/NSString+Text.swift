@@ -2,7 +2,7 @@
 //  NSString+Text.swift
 //  TWWeather
 //
-//  Created by Zoe on 19/06/2016.
+//  Created by Tingting Wen on 19/06/2016.
 //  Copyright © 2016 Tingting Wen. All rights reserved.
 //
 
@@ -30,7 +30,7 @@ extension NSString {
     }
     
     static var VenueTableNoDataMessage: String {
-        return "No data available. \n \n Please pull down to refresh or change filter condition."
+        return "No data available. \n Please pull down to refresh, \n or change filter condition"
     }
     
     static var SearchTableNoDataMessage: String {

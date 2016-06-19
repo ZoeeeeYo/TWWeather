@@ -2,7 +2,7 @@
 //  SearchVenueTableViewController.swift
 //  TWWeather
 //
-//  Created by Zoe on 18/06/2016.
+//  Created by Tingting Wen on 18/06/2016.
 //  Copyright © 2016 Tingting Wen. All rights reserved.
 //
 

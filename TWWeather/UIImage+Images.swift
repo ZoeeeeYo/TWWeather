@@ -2,7 +2,7 @@
 //  UIImage+Images.swift
 //  TWWeather
 //
-//  Created by Zoe on 19/06/2016.
+//  Created by Tingting Wen on 19/06/2016.
 //  Copyright © 2016 Tingting Wen. All rights reserved.
 //
 
